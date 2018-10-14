@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import styles from "./sass/styles.scss";
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="app">
         <h1>Giphy Search</h1>
       </div>
     );
