@@ -17,7 +17,6 @@ class GifView extends Component {
 
   renderGifs = (gifData, layout) =>
     gifData.map(gif => (
-      // <img key={`${gif.id}`} src={`${gif.images.fixed_height.url}`} />
       <GifCard key={`${gif.id}`} layout={layout} gif={gif} />
     ));
 

@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const GifCard = ({ gif }) => (
-  <div className="gifcard-container">
+const GifCard = ({ gif, layout }) => (
+  <div className={`gifcard-container ${layout}`}>
     <img
       alt={`${gif.title} Gif`}
       key={`${gif.id}`}

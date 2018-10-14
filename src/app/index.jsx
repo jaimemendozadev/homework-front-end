@@ -59,7 +59,7 @@ class App extends Component {
     if (offset >= totalCount) return;
 
     const lastImg = document.querySelector(
-      "div.gif-container > img:last-child"
+      "div.gif-container > .gifcard-container:last-child"
     );
     const lastImgOffset = lastImg.offsetTop + lastImg.clientHeight;
     const pageOffset = window.pageYOffset + window.innerHeight;
