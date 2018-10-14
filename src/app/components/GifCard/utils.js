@@ -1,5 +1,8 @@
-export const setLayoutGifSize = (currentLayout, gif) => {
-    if(currentLayout = "mobile-layout") {
-  
+export const setLayoutGifSize = (gif, currentLayout) => {
+    // gif.images.fixed_height.url
+    if(currentLayout === "mobile-layout") {
+      return `${gif.images.fixed_height.url}`
     }
+
+    return "";
   }

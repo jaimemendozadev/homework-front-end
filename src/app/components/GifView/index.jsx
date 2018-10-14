@@ -17,10 +17,6 @@ class GifView extends Component {
 
   renderGifs = (gifData, layout) =>
     gifData.map(gif => {
-      console.log(
-        "GifCard to render ",
-        <GifCard key={`${gif.id}`} layout={layout} gif={gif} />
-      );
       return <GifCard key={`${gif.id}`} layout={layout} gif={gif} />;
     });
 
