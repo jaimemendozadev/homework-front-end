@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Placeholder from "../../assets/dancing-slack-penguin.gif";
 import { setLayoutGifSize } from "./utils";
@@ -37,6 +38,10 @@ class GifPlaceHolder extends Component {
     const { imgURL, imgClassName } = this.state;
     return (
       <div className={`gifcard-container ${layout}`}>
+        <Link to={{ pathname: `/gif/${gif.id}` }}>
+          Link to Gif
+          {gif.id}
+        </Link>
         <img
           className={imgClassName}
           alt={`${gif.title} Gif`}
