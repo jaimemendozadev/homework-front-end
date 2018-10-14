@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { getWindowDimensions, setCurrentLayout } from "./utils";
 
 const defaultState = {
   width: 0,
-  height: 0
+  height: 0,
+  currentLayout: "Desktop"
 };
 
 class GifView extends Component {
@@ -18,7 +20,13 @@ class GifView extends Component {
     ));
 
   updateWindowDimensions = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    const { width, height } = getWindowDimensions();
+
+    const currentLayout = setCurrentLayout(width);
+
+    console.log("currentLayout is ", currentLayout);
+
+    this.setState({ width, height, currentLayout });
   };
 
   componentDidMount = () => {
