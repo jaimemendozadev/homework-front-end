@@ -1,6 +1,6 @@
 /* eslint prefer-destructuring: "warn", no-unused-vars: "warn" */
 import React, { Component } from "react";
-import styles from "./sass/styles.scss";
+import styles from "./sass/_styles.scss";
 
 const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
 const API_KEY = process.env.API_KEY;
