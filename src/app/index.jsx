@@ -100,7 +100,7 @@ class App extends Component {
   render() {
     const { gifData } = this.state;
     return (
-      <div>
+      <div className="app-container">
         <h1>Giphy Sandbox</h1>
         <GifView gifData={gifData} />
       </div>
