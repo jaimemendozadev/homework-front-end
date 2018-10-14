@@ -1,15 +1,27 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-const GifCard = ({ gif, layout }) => (
-  <div className={`gifcard-container ${layout}`}>
-    <img
-      alt={`${gif.title} Gif`}
-      key={`${gif.id}`}
-      src={`${gif.images.fixed_height.url}`}
-    />
-  </div>
-);
+class GifCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imgURL: null
+    };
+  }
+
+  render() {
+    const { gif, layout } = this.props;
+    return (
+      <div className={`gifcard-container ${layout}`}>
+        <img
+          alt={`${gif.title} Gif`}
+          key={`${gif.id}`}
+          src={`${gif.images.fixed_height.url}`}
+        />
+      </div>
+    );
+  }
+}
 
 GifCard.propTypes = {
   gif: PropTypes.shape({
