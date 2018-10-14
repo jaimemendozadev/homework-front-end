@@ -1,6 +1,7 @@
 /* eslint prefer-destructuring: "warn", no-unused-vars: "warn" */
 import React, { Component } from "react";
 import styles from "./sass/styles.scss";
+import GifCard from "./components/GifCard.jsx";
 
 const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
 const API_KEY = process.env.API_KEY;
@@ -86,7 +87,7 @@ class App extends Component {
       this.handleScroll(e);
     });
 
-    console.log('totalCount is ', totalCount)
+    console.log("totalCount is ", totalCount);
 
     this.setState({
       gifData: data,
