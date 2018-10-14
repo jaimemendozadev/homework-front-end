@@ -1,6 +1,8 @@
 /* eslint prefer-destructuring: "warn", no-unused-vars: "warn" */
 import React, { Component } from "react";
 import styles from "./sass/_styles.scss";
+import GifCard from "./components/GifCard.jsx";
+import GifView from "./components/GifView.jsx";
 
 const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
 const API_KEY = process.env.API_KEY;
@@ -16,11 +18,6 @@ class App extends Component {
     super(props);
     this.state = defaultState;
   }
-
-  renderGifs = gifData =>
-    gifData.map(gif => (
-      <img key={`${gif.id}`} src={`${gif.images.fixed_height.url}`} />
-    ));
 
   fetchGifs = async () => {
     const { offset } = this.state;
@@ -86,7 +83,7 @@ class App extends Component {
       this.handleScroll(e);
     });
 
-    console.log('totalCount is ', totalCount)
+    console.log("totalCount is ", totalCount);
 
     this.setState({
       gifData: data,
@@ -100,9 +97,7 @@ class App extends Component {
     return (
       <div>
         <h1>Giphy Sandbox</h1>
-        <div className="gif-container">
-          {gifData.length === 0 ? null : this.renderGifs(gifData)}
-        </div>
+        <GifView gifData={gifData} />
       </div>
     );
   }
