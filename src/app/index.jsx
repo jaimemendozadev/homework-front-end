@@ -1,7 +1,10 @@
 /* eslint prefer-destructuring: "warn", no-unused-vars: "warn" */
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./sass/_styles.scss";
 import GifView from "./components/GifView/index.jsx";
+import GifCard from "./components/GifCard/index.jsx";
 
 const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
 const API_KEY = process.env.API_KEY;
@@ -99,6 +102,16 @@ class App extends Component {
 
   render() {
     const { gifData } = this.state;
+    const {
+      location: { pathname }
+    } = this.props;
+    console.log("this.props inside Main App ", this.props);
+    console.log("pathname is ", pathname);
+
+    if (pathname.match(/\/gif/gi)) {
+      return <Route path="/gif/:id" component={GifCard} />;
+    }
+
     return (
       <div className="app-container">
         <h1>Giphy Sandbox</h1>
@@ -107,5 +120,14 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+    pathname: PropTypes.string,
+    search: PropTypes.string,
+    state: PropTypes.object
+  }).isRequired
+};
 
 export default App;
