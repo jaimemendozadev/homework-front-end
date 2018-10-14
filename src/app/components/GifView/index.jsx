@@ -16,9 +16,7 @@ class GifView extends Component {
   }
 
   renderGifs = (gifData, layout) =>
-    gifData.map(gif => {
-      return <GifCard key={`${gif.id}`} layout={layout} gif={gif} />;
-    });
+    gifData.map(gif => <GifCard key={`${gif.id}`} layout={layout} gif={gif} />);
 
   updateWindowDimensions = () => {
     const { width, height } = getWindowDimensions();

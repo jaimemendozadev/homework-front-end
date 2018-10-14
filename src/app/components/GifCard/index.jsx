@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Placeholder from "../../assets/dancing-slack-penguin.gif";
-import {setLayoutGifSize} from "./utils";
+import { setLayoutGifSize } from "./utils";
 
 const defaultState = {
   imgURL: Placeholder,
-  imgClassName: "gif-placeholder",
+  imgClassName: "gif-placeholder"
 };
 
 class GifCard extends Component {
@@ -16,7 +16,7 @@ class GifCard extends Component {
 
   componentDidMount = () => {
     const { gif, layout } = this.props;
-    
+
     // Create New Image
     const fetchedGif = new Image();
 
@@ -28,9 +28,9 @@ class GifCard extends Component {
       this.setState({
         imgURL: fetchedGif.src,
         imgClassName: "fetched-gif"
-      })
-    }
-  }
+      });
+    };
+  };
 
   render() {
     const { gif, layout } = this.props;
