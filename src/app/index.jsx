@@ -23,14 +23,14 @@ class App extends Component {
     const { offset } = this.state;
     const { gifData } = this.state;
 
-    console.log("offset ", offset);
+    // console.log("offset ", offset);
     const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}&offset=${offset}`;
 
     const giphyResponse = await fetch(REQ_URL)
       .then(response => response.json())
       .catch(error => console.log("error fetching ", error));
 
-    console.log("giphyReponse ", giphyResponse);
+    // console.log("giphyReponse ", giphyResponse);
 
     const { data, pagination } = giphyResponse;
     const { totalCount } = pagination;
@@ -69,6 +69,10 @@ class App extends Component {
     }
   };
 
+  invokeHandleScroll = event => {
+    this.handleScroll(event);
+  };
+
   componentDidMount = async () => {
     const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}`;
 
@@ -79,17 +83,19 @@ class App extends Component {
     const { data, pagination } = giphyResponse;
     const { total_count: totalCount, offset } = pagination;
 
-    window.addEventListener("scroll", e => {
-      this.handleScroll(e);
-    });
+    window.addEventListener("scroll", this.invokeHandleScroll);
 
-    console.log("totalCount is ", totalCount);
+    // console.log("totalCount is ", totalCount);
 
     this.setState({
       gifData: data,
       totalCount,
       offset
     });
+  };
+
+  componentWillUnmount = () => {
+    window.removeEventListener("scroll", this.invokeHandleScroll);
   };
 
   render() {
