@@ -8,7 +8,7 @@ const defaultState = {
   imgClassName: "gif-placeholder"
 };
 
-class GifCard extends Component {
+class GifPlaceHolder extends Component {
   constructor(props) {
     super(props);
     this.state = defaultState;
@@ -48,7 +48,7 @@ class GifCard extends Component {
   }
 }
 
-GifCard.propTypes = {
+GifPlaceHolder.propTypes = {
   gif: PropTypes.shape({
     bitly_gif_url: PropTypes.string,
     bitly_url: PropTypes.string,
@@ -73,4 +73,4 @@ GifCard.propTypes = {
   layout: PropTypes.string.isRequired
 };
 
-export default GifCard;
+export default GifPlaceHolder;

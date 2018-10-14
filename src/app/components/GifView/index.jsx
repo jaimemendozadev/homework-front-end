@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import GifCard from "../GifCard/index.jsx";
+import GifPlaceHolder from "../GifPlaceHolder/index.jsx";
 import { getWindowDimensions, setCurrentLayout } from "./utils";
 
 const defaultState = {
@@ -16,7 +16,7 @@ class GifView extends Component {
   }
 
   renderGifs = (gifData, layout) =>
-    gifData.map(gif => <GifCard key={`${gif.id}`} layout={layout} gif={gif} />);
+    gifData.map(gif => <GifPlaceHolder key={`${gif.id}`} layout={layout} gif={gif} />);
 
   updateWindowDimensions = () => {
     const { width, height } = getWindowDimensions();
