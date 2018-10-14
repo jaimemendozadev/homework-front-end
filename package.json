@@ -39,7 +39,7 @@
   "scripts": {
     "dev:build": "webpack --mode=development --watch",
     "dev:start": "nodemon index.js",
-    "lint": "./node_modules/.bin/eslint --fix ./src/**/* && ./node_modules/.bin/eslint --fix ./server/**/*"
+    "lint": "./node_modules/.bin/eslint --fix './src/**/*.{js,jsx}' && ./node_modules/.bin/eslint --fix ./server/**/*"
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"

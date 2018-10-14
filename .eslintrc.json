@@ -5,6 +5,7 @@
   "extends": ["airbnb", "plugin:prettier/recommended"],
   "parser": "babel-eslint",
   "rules": {
-    "react/jsx-filename-extension": ["error",{"extensions": [".js", ".jsx"]}]
+    "react/jsx-filename-extension": ["off", {"extensions": [".js", ".jsx"]}],
+    "import/extensions": "off"
   }
 }
