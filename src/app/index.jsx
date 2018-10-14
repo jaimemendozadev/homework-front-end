@@ -80,11 +80,13 @@ class App extends Component {
     );
 
     const { data, pagination } = giphyResponse;
-    const { totalCount, offset } = pagination;
+    const { total_count: totalCount, offset } = pagination;
 
     window.addEventListener("scroll", e => {
       this.handleScroll(e);
     });
+
+    console.log('totalCount is ', totalCount)
 
     this.setState({
       gifData: data,
