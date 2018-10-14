@@ -102,15 +102,6 @@ class App extends Component {
 
   render() {
     const { gifData } = this.state;
-    const {
-      location: { pathname }
-    } = this.props;
-    console.log("this.props inside Main App ", this.props);
-    console.log("pathname is ", pathname);
-
-    if (pathname.match(/\/gif/gi)) {
-      return <Route path="/gif/:id" component={GifCard} />;
-    }
 
     return (
       <div className="app-container">
