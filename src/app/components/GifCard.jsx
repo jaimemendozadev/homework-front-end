@@ -1,22 +1,25 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Placeholder from "../assets/dancing-slack-penguin.gif";
 
 class GifCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgURL: null
+      imgURL: Placeholder
     };
   }
 
   render() {
     const { gif, layout } = this.props;
+    const {imgURL} = this.state;
     return (
       <div className={`gifcard-container ${layout}`}>
         <img
           alt={`${gif.title} Gif`}
           key={`${gif.id}`}
-          src={`${gif.images.fixed_height.url}`}
+        //   src={`${gif.images.fixed_height.url}`}
+        src={imgURL}
         />
       </div>
     );

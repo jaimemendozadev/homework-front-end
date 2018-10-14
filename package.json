@@ -19,6 +19,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
+    "file-loader": "^2.0.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.9.3",
     "nodemon": "^1.18.4",
@@ -38,7 +39,7 @@
     "react-dom": "16.5.2"
   },
   "scripts": {
-    "clear:public": "rm -rfv ./public/*.js && rm -rfv ./public/*.css",
+    "clear:public": "rm -rfv ./public/*.js && rm -rfv ./public/*.gif  && rm -rfv ./public/*.css",
     "dev:build": "webpack --mode=development --watch",
     "dev:start": "nodemon index.js",
     "lint": "./node_modules/.bin/eslint --fix './src/**/*.{js,jsx}' && ./node_modules/.bin/eslint --fix ./server/**/*"
