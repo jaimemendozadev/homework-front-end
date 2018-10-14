@@ -38,6 +38,7 @@
     "react-dom": "16.5.2"
   },
   "scripts": {
+    "clear:public": "rm -rfv ./public/*.js && rm -rfv ./public/*.css",
     "dev:build": "webpack --mode=development --watch",
     "dev:start": "nodemon index.js",
     "lint": "./node_modules/.bin/eslint --fix './src/**/*.{js,jsx}' && ./node_modules/.bin/eslint --fix ./server/**/*"

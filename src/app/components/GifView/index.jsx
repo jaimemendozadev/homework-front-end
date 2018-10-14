@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import GifCard from "../GifCard.jsx";
 import { getWindowDimensions, setCurrentLayout } from "./utils";
 
 const defaultState = {
   width: 0,
   height: 0,
-  currentLayout: "Desktop"
+  currentLayout: "desktop-layout"
 };
 
 class GifView extends Component {
@@ -14,9 +15,10 @@ class GifView extends Component {
     this.state = defaultState;
   }
 
-  renderGifs = gifData =>
+  renderGifs = (gifData, layout) =>
     gifData.map(gif => (
-      <img key={`${gif.id}`} src={`${gif.images.fixed_height.url}`} />
+      // <img key={`${gif.id}`} src={`${gif.images.fixed_height.url}`} />
+      <GifCard key={`${gif.id}`} layout={layout} gif={gif} />
     ));
 
   updateWindowDimensions = () => {
@@ -40,11 +42,12 @@ class GifView extends Component {
 
   render() {
     const { gifData } = this.props;
+    const { currentLayout } = this.state;
 
     console.log("incoming gifData ", gifData);
     return (
-      <div className="gif-container">
-        {gifData.length === 0 ? null : this.renderGifs(gifData)}
+      <div className={`gif-container ${currentLayout}`}>
+        {gifData.length === 0 ? null : this.renderGifs(gifData, currentLayout)}
       </div>
     );
   }

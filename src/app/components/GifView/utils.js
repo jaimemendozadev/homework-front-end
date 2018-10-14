@@ -9,15 +9,15 @@ export const setCurrentLayout = width => {
   let currentLayout;
 
   if (width > 1200) {
-    currentLayout = "Desktop";
+    currentLayout = "desktop-layout";
   }
 
   if (width > 480 && width <= 1200) {
-    currentLayout = "Tablet";
+    currentLayout = "tablet-layout";
   }
 
   if (width <= 480) {
-    currentLayout = "Mobile";
+    currentLayout = "mobile-layout";
   }
 
   return currentLayout;
