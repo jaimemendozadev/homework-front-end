@@ -1,25 +1,41 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Placeholder from "../assets/dancing-slack-penguin.gif";
+import Placeholder from "../../assets/dancing-slack-penguin.gif";
+
+
+
+const defaultState = {
+  imgURL: Placeholder
+};
 
 class GifCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      imgURL: Placeholder
-    };
+    this.state = defaultState;
+  }
+
+  componentDidMount = () => {
+    // const gifImage = new Image();
+    
+    // gifImage.src = 
+
+    // gifImage.onload = () => {
+    //   this.setState({
+    //     imageURL:   
+    //   })
+    // }
   }
 
   render() {
     const { gif, layout } = this.props;
-    const {imgURL} = this.state;
+    const { imgURL } = this.state;
     return (
       <div className={`gifcard-container ${layout}`}>
         <img
           alt={`${gif.title} Gif`}
           key={`${gif.id}`}
-        //   src={`${gif.images.fixed_height.url}`}
-        src={imgURL}
+          //   src={`${gif.images.fixed_height.url}`}
+          src={imgURL}
         />
       </div>
     );
@@ -47,7 +63,8 @@ GifCard.propTypes = {
     url: PropTypes.string,
     user: PropTypes.object,
     username: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  layout: PropTypes.string.isRequired
 };
 
 export default GifCard;

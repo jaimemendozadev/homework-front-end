@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import GifCard from "../GifCard.jsx";
+import GifCard from "../GifCard/index.jsx";
 import { getWindowDimensions, setCurrentLayout } from "./utils";
 
 const defaultState = {

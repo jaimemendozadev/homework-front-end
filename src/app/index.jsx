@@ -1,7 +1,6 @@
 /* eslint prefer-destructuring: "warn", no-unused-vars: "warn" */
 import React, { Component } from "react";
 import styles from "./sass/_styles.scss";
-import GifCard from "./components/GifCard.jsx";
 import GifView from "./components/GifView/index.jsx";
 
 const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
