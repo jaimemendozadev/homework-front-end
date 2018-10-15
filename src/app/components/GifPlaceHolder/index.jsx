@@ -36,18 +36,19 @@ class GifPlaceHolder extends Component {
   render() {
     const { gif, layout } = this.props;
     const { imgURL, imgClassName } = this.state;
+
+    // Possible className layouts: mobile-layout, tablet-layout, desktop-layout
+    // Possible img classNames: gif-placeholder, fetched-gif
     return (
-      <div className={`gifcard-container ${layout}`}>
-        <Link to={{ pathname: `/gif/${gif.id}` }}>
-          Link to Gif
-          {gif.id}
+      <div className={`gifplaceholder-container ${layout}`}>
+        <Link to={{ pathname: `/gif/${gif.id}`, state: { gif } }}>
+          <img
+            className={imgClassName}
+            alt={`${gif.title} Gif`}
+            key={`${gif.id}`}
+            src={imgURL}
+          />
         </Link>
-        <img
-          className={imgClassName}
-          alt={`${gif.title} Gif`}
-          key={`${gif.id}`}
-          src={imgURL}
-        />
       </div>
     );
   }

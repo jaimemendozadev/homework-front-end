@@ -1,9 +1,12 @@
 import React from "react";
 
-const GifCard = () => (
-  <div className="app-container">
-    <h1>GifCard</h1>
-  </div>
-);
+const GifCard = props => {
+  console.log("props inside GifCard ", props);
+  return (
+    <div className="app-container">
+      <div className="gifcard-container" />
+    </div>
+  );
+};
 
 export default GifCard;

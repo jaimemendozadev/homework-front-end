@@ -45,7 +45,7 @@ class GifView extends Component {
 
     console.log("incoming gifData ", gifData);
     return (
-      <div className={`gif-container ${currentLayout}`}>
+      <div className={`gifview-container ${currentLayout}`}>
         {gifData.length === 0 ? null : this.renderGifs(gifData, currentLayout)}
       </div>
     );
