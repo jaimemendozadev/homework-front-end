@@ -2,12 +2,20 @@
   .gifcard-container {
     height: 100vh;
     border: 1px solid pink;
+
+  }
+
+  .gifcard-gif-container {
+    width: 400px;  
+    margin: 0 auto;
   }
 }
 
 
 .gifcard-gif-container {
   img {
+    width: 100%;
+    height: 100%;  
     display: block;
   }
 }

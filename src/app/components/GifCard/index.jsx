@@ -16,16 +16,17 @@ const GifCard = props => {
         </div>
 
         <div className="gifcard-gif-container">
-          <img src={images.fixed_width.url} />
+          <img src={images.original.url} />
         </div>
 
         <div className="gifcard-text-container">
           <h4>
             Title:
-            {title.toUpperCase()}
+            {` ${title.toUpperCase()}`}
           </h4>
           <h4>
             Gif By:
+{" "}
             <a
               href={`https://giphy.com/${username}`}
               rel="noopener noreferrer"
