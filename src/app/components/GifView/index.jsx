@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import GifPlaceHolder from "../GifPlaceHolder/index.jsx";
-import { getWindowDimensions, setCurrentLayout } from "./utils";
+import { getWindowDimensions, setCurrentLayout } from "../utils";
 
 const defaultState = {
   width: 0,
