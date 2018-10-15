@@ -12,10 +12,25 @@
 }
 
 
+.gifstagram-icon {
+  display: flex;
+  flex-direction: flex-start;
+  align-items: center;
+  margin-left: 1em;
+  
+  img {
+    display: block;
+  }
+}
+
 .gifcard-gif-container {
   img {
     width: 100%;
     height: 100%;  
     display: block;
   }
+}
+
+.gifcard-text-container {
+  margin-left: 1em;
 }
