@@ -4,5 +4,9 @@ export const setLayoutGifSize = (gif, currentLayout) => {
     return `${gif.images.fixed_height.url}`;
   }
 
+  if (currentLayout === "GifCard") {
+    return `${gif.images.original.url}`;
+  }
+
   return "";
 };

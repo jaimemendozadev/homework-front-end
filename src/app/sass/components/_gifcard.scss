@@ -1,6 +1,6 @@
 @media only screen and (max-width: 480px) {
   .gifcard-container {
-    height: 100vh;
+    height: 120vh;
     border: 1px solid pink;
 
   }
@@ -12,7 +12,8 @@
 }
 
 
-.gifstagram-icon {
+
+.gifstagram-icon-container {
   display: flex;
   flex-direction: flex-start;
   align-items: center;
@@ -23,11 +24,14 @@
   }
 }
 
+
+
 .gifcard-gif-container {
   img {
     width: 100%;
     height: 100%;  
     display: block;
+    
   }
 }
 

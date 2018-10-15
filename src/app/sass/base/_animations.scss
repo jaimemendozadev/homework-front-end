@@ -1,0 +1,11 @@
+.gifcard-gif-container {
+    img {
+      opacity: 0;
+      
+      transition: opacity 600ms ease; //Play around with timing
+  
+      &.fetched-gif {
+        opacity: 1;
+      }
+    }
+  }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Placeholder from "../../assets/dancing-slack-penguin.gif";
-import { setLayoutGifSize } from "./utils";
+import { setLayoutGifSize } from "../utils";
 
 const defaultState = {
   imgURL: Placeholder,
