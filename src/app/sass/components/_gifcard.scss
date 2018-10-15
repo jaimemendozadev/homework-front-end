@@ -1,0 +1,13 @@
+@media only screen and (max-width: 480px) {
+  .gifcard-container {
+    height: 100vh;
+    border: 1px solid pink;
+  }
+}
+
+
+.gifcard-gif-container {
+  img {
+    display: block;
+  }
+}

@@ -1,13 +1,23 @@
-*:before, *:after {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
-  }
-  
-  body {
-    box-sizing: border-box;
-  }
+*:before, 
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
 
-  img.fetched-gif { 
-    border: 1px solid pink;
+body {
+  box-sizing: border-box;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
+  Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+img.fetched-gif { 
+  border: 1px solid pink;
+}
+
+.gifstagram-icon {
+  img {
+    width: 25px;
+    height: 25px;
   }
+}

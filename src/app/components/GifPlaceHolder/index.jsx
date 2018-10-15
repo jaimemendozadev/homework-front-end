@@ -9,6 +9,8 @@ const defaultState = {
   imgClassName: "gif-placeholder"
 };
 
+console.log("PlaceHolder is ", Placeholder);
+
 class GifPlaceHolder extends Component {
   constructor(props) {
     super(props);
