@@ -1,6 +1,21 @@
 @media only screen and (max-width: 480px) {
   
+  .gifplaceholder-container {
+    width: 30%;
+    display: flex;
+    align-items: center;   
 
+    img.fetched-gif {
+      width: 100%;
+      height: 100%;
+      display: block;  // Prevents display of inline image
+    }
+
+    img.gif-placeholder {
+      width: 50px;
+      height: 50px;  
+    }
+  }
 }
 
 
