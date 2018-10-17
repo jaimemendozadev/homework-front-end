@@ -7,7 +7,7 @@ export const setLayoutGifSize = (gif, currentLayout) => {
   }
 
   if (currentLayout === "tablet-layout") {
-    return `${gif.images.downsized_medium.url}`;
+    return `${gif.images.fixed_width.url}`;
   }
 
   if (currentLayout === "GifCard") {

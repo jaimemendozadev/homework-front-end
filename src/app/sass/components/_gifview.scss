@@ -16,5 +16,12 @@
   .gifview-container {
     border: 5px solid goldenrod;
   }
+
+  .tablet-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 1em;
+  }
   
 }
