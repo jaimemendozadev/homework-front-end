@@ -15,8 +15,40 @@
   }
 }
 
+@media only screen and (min-width: 481px) and (max-width: 1024px) and (orientation: portrait) {
+
+  .app-container-gif-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    border: 1px solid green;
+  }
+  
+  .gifcard-container {
+    width: 70%;
+    height: 60%;
+    border: 1px solid pink;
+  }
+}
 
 
+@media only screen and (min-width: 481px) and (max-width: 1024px) and (orientation: landscape) {
+  .app-container-gif-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    border: 1px solid green;
+  }
+
+
+  .gifcard-container {
+    width: 80%;
+    border: 1px solid pink;
+  }
+}
 
 
 

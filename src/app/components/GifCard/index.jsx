@@ -49,7 +49,7 @@ class GifCard extends Component {
     console.log("gif inside GifCard ", gif);
 
     return (
-      <div className="app-container">
+      <div className="app-container-gif-card">
         <div className="gifcard-container">
           <div className="gifstagram-icon-container">
             <div className="logo-container">

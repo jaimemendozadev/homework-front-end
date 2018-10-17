@@ -105,7 +105,10 @@ class App extends Component {
 
     return (
       <div className="app-container">
-        <h1>Giphy Sandbox</h1>
+        <div className="top-half">
+          <h1>Giphy Sandbox</h1>
+        </div>
+
         <GifView gifData={gifData} />
       </div>
     );
