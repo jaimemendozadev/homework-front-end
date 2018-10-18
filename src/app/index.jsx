@@ -1,14 +1,14 @@
-/* eslint prefer-destructuring: "warn", no-unused-vars: "warn" */
+/* no-unused-vars: "warn" */
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./sass/_styles.scss";
 import GifView from "./components/GifView/index.jsx";
 import Search from "./components/Search/index.jsx";
-
-const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
-const API_KEY = process.env.API_KEY;
-const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}`;
+import {
+  handleScroll,
+  fetchGifs,
+  makeInitialGiphyRequest
+} from "../services/giphy/index.js";
 
 const defaultState = {
   gifData: [],
@@ -23,27 +23,10 @@ class App extends Component {
     this.state = defaultState;
   }
 
-  fetchGifs = async () => {
-    const { offset } = this.state;
-    const { gifData } = this.state;
+  setGifState = async () => {
+    const giphyResult = await fetchGifs(this.state);
 
-    // console.log("offset ", offset);
-    const reqURL = `${REQ_URL}&offset=${offset}`;
-
-    const giphyResponse = await fetch(reqURL)
-      .then(response => response.json())
-      .catch(error => console.log("error fetching ", error));
-
-    // console.log("giphyReponse ", giphyResponse);
-
-    const { data, pagination } = giphyResponse;
-    const { totalCount } = pagination;
-
-    this.setState({
-      gifData: [...gifData, ...data],
-      totalCount,
-      scrolling: false
-    });
+    this.setState(giphyResult);
   };
 
   loadMore = () => {
@@ -52,35 +35,20 @@ class App extends Component {
         offset: prevState.offset + 25,
         scrolling: true
       }),
-      this.fetchGifs
+      this.setGifState
     );
   };
 
-  handleScroll = () => {
-    const { scrolling, totalCount, offset } = this.state;
+  invokeHandleScroll = event => {
+    const loadMore = handleScroll(this.state);
 
-    if (scrolling) return;
-    if (offset >= totalCount) return;
-
-    const lastImg = document.querySelector(
-      "div.gifview-container > .gifplaceholder-container:last-child"
-    );
-    const lastImgOffset = lastImg.offsetTop + lastImg.clientHeight;
-    const pageOffset = window.pageYOffset + window.innerHeight;
-    const bottomOffset = 20;
-    if (pageOffset > lastImgOffset - bottomOffset) {
+    if (loadMore === true) {
       this.loadMore();
     }
   };
 
-  invokeHandleScroll = event => {
-    this.handleScroll(event);
-  };
-
   componentDidMount = async () => {
-    const giphyResponse = await fetch(REQ_URL).then(response =>
-      response.json()
-    );
+    const giphyResponse = await makeInitialGiphyRequest();
 
     const { data, pagination } = giphyResponse;
     const { total_count: totalCount, offset } = pagination;
