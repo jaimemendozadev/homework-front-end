@@ -24,6 +24,7 @@ class App extends Component {
   }
 
   setGifState = async () => {
+    // get more Gifs and set in state
     const giphyResult = await fetchGifs(this.state);
 
     this.setState(giphyResult);
@@ -40,6 +41,8 @@ class App extends Component {
   };
 
   invokeHandleScroll = event => {
+    // handleScroll checks window dimensions and if 
+    // user reaches bottom of page, loadMore() gifs
     const loadMore = handleScroll(this.state);
 
     if (loadMore === true) {
@@ -48,11 +51,13 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
+    // On CDM, make initialGiphyReq
     const giphyResponse = await makeInitialGiphyRequest();
 
     const { data, pagination } = giphyResponse;
     const { total_count: totalCount, offset } = pagination;
 
+    // Add event listener when user scrolls to bottom of page
     window.addEventListener("scroll", this.invokeHandleScroll);
 
     // console.log("totalCount is ", totalCount);

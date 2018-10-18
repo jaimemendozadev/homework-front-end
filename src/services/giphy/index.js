@@ -3,11 +3,13 @@ const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
 const API_KEY = process.env.API_KEY;
 const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}`;
 
+
 export const makeInitialGiphyRequest = async () => {
   const giphyResponse = await fetch(REQ_URL).then(response => response.json());
 
   return giphyResponse;
 };
+
 
 export const handleScroll = state => {
   const { scrolling, totalCount, offset } = state;
