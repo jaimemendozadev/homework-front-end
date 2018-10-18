@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./sass/_styles.scss";
 import GifView from "./components/GifView/index.jsx";
+import Search from "./components/Search/index.jsx";
 
 const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
 const API_KEY = process.env.API_KEY;
@@ -27,9 +28,9 @@ class App extends Component {
     const { gifData } = this.state;
 
     // console.log("offset ", offset);
-    const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}&offset=${offset}`;
+    const reqURL = `${REQ_URL}&offset=${offset}`;
 
-    const giphyResponse = await fetch(REQ_URL)
+    const giphyResponse = await fetch(reqURL)
       .then(response => response.json())
       .catch(error => console.log("error fetching ", error));
 
@@ -107,6 +108,8 @@ class App extends Component {
         <div className="top-half">
           <h1>Gifstagram</h1>
         </div>
+
+        <Search />
 
         <GifView gifData={gifData} />
       </div>
