@@ -48,15 +48,16 @@ class Search extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    const {searchValue} = this.state;
+    const { searchValue } = this.state;
 
-    const giphyResult = await fetch(`${SEARCH_URL}&q=${searchValue}`).then(response => response.json());
+    const giphyResult = await fetch(`${SEARCH_URL}&q=${searchValue}`).then(
+      response => response.json()
+    );
 
-    console.log('giphyResult is ', giphyResult)
+    console.log("giphyResult is ", giphyResult);
 
     this.setState(defaultState);
-
-  }
+  };
 
   render() {
     const { searchValue } = this.state;
