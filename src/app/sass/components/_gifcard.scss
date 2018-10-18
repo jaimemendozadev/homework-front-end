@@ -4,13 +4,13 @@
 
 @media only screen and (max-width: 480px) {
   .gifcard-container {
-    height: 120vh;
+    height: 60vh;
     border: 1px solid pink;
 
   }
 
   .gifcard-gif-container {
-    width: 400px;  
+    width: 80%;  
     margin: 0 auto;
   }
 }
@@ -27,7 +27,7 @@
   }
   
   .gifcard-container {
-    width: 70%;
+    width: 65%; // width controls size of gifcard-image
     height: 60%;
     border: 1px solid pink;
   }
@@ -43,14 +43,28 @@
     border: 1px solid green;
   }
 
-
-  .gifcard-container {
-    width: 80%;
+  
+  .gifcard-container { 
+    width: 50%; // width controls size of gifcard-image
     border: 1px solid pink;
   }
 }
 
+@media only screen and (min-width: 1025px) {
 
+  .app-container-gif-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    border: 1px solid green;
+  }
+
+  .gifcard-container { 
+    width: 35%; // width controls size of gifcard-image
+    border: 1px solid pink;
+  }
+}
 
 /***********************
  Base Component Styles

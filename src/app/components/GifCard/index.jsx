@@ -50,21 +50,23 @@ class GifCard extends Component {
 
     return (
       <div className="app-container-gif-card">
+
         <div className="gifcard-container">
+
           <div className="gifstagram-icon-container">
             <div className="logo-container">
               <img src={`/${Logo}`} />
             </div>
 
             <h2>Gifstagram</h2>
-          </div>
+          </div> {/* end gifstagram-icon-container  */}
 
           <div className="gifcard-gif-container">
             <img
               className={`gifcard-image ${imgClassName}`}
               src={images.original.url}
             />
-          </div>
+          </div> {/* end gifcard-gif-container  */}
 
           <div className="gifcard-text-container">
             <h4>
@@ -84,8 +86,9 @@ class GifCard extends Component {
                 @{username}
               </a>
             </h4>
-          </div>
-        </div>
+          </div> {/* end gifcard-text-container  */} 
+
+        </div> {/* end gifcard-container */} 
       </div>
     );
   }
