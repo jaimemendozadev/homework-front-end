@@ -25,3 +25,16 @@
   }
   
 }
+
+@media only screen and (min-width: 1025px) {
+  .gifview-container {
+    width: 80%;
+    border: 1px solid aquamarine;
+  }
+
+  .desktop-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}

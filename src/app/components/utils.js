@@ -10,6 +10,10 @@ export const setLayoutGifSize = (gif, currentLayout) => {
     return `${gif.images.fixed_width.url}`;
   }
 
+  if (currentLayout === "desktop-layout") {
+    return `${gif.images.original.url}`;
+  }
+
   if (currentLayout === "GifCard") {
     return `${gif.images.original.url}`;
   }
@@ -27,7 +31,7 @@ export const getWindowDimensions = () => {
 export const setCurrentLayout = width => {
   let currentLayout;
 
-  if (width > 1200) {
+  if (width >= 1025) {
     currentLayout = "desktop-layout";
   }
 
