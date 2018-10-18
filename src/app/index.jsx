@@ -4,10 +4,11 @@ import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./sass/_styles.scss";
 import GifView from "./components/GifView/index.jsx";
-import GifCard from "./components/GifCard/index.jsx";
 
 const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
 const API_KEY = process.env.API_KEY;
+const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}`;
+
 const defaultState = {
   gifData: [],
   offset: null,
@@ -76,8 +77,6 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
-    const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}`;
-
     const giphyResponse = await fetch(REQ_URL).then(response =>
       response.json()
     );
@@ -106,7 +105,7 @@ class App extends Component {
     return (
       <div className="app-container">
         <div className="top-half">
-          <h1>Giphy Sandbox</h1>
+          <h1>Gifstagram</h1>
         </div>
 
         <GifView gifData={gifData} />

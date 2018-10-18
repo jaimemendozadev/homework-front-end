@@ -50,24 +50,22 @@ class GifCard extends Component {
 
     return (
       <div className="app-container-gif-card">
-
         <div className="gifcard-container">
-
           <div className="gifstagram-icon-container">
             <div className="logo-container">
               <img src={`/${Logo}`} />
             </div>
 
             <h2>Gifstagram</h2>
-          </div> {/* end gifstagram-icon-container  */}
-
+          </div>
+          {/* end gifstagram-icon-container  */}
           <div className="gifcard-gif-container">
             <img
               className={`gifcard-image ${imgClassName}`}
               src={images.original.url}
             />
-          </div> {/* end gifcard-gif-container  */}
-
+          </div>
+          {/* end gifcard-gif-container  */}
           <div className="gifcard-text-container">
             <h4>
               Title:
@@ -86,48 +84,22 @@ class GifCard extends Component {
                 @{username}
               </a>
             </h4>
-          </div> {/* end gifcard-text-container  */} 
-
-        </div> {/* end gifcard-container */} 
+          </div>
+          {/* end gifcard-text-container  */}
+        </div>
+        {/* end gifcard-container */}
       </div>
     );
   }
 }
 
-GifCard.defaultProps = {
-  hash: "",
-  key: "",
-  pathname: "",
-  search: "",
-  state: {}
-};
-
 GifCard.propTypes = {
-  hash: PropTypes.string,
-  key: PropTypes.string,
-  pathname: PropTypes.string,
-  search: PropTypes.string,
-  state: PropTypes.shape({
-    bitly_gif_url: PropTypes.string,
-    bitly_url: PropTypes.string,
-    content_url: PropTypes.string,
-    embed_url: PropTypes.string,
-    id: PropTypes.string,
-    images: PropTypes.object,
-    import_datetime: PropTypes.string,
-    is_sticker: PropTypes.number,
-    rating: PropTypes.string,
-    slug: PropTypes.string,
-    source: PropTypes.string,
-    source_post_url: PropTypes.string,
-    source_tld: PropTypes.string,
-    title: PropTypes.string,
-    trending_datetime: PropTypes.string,
-    type: PropTypes.string,
-    url: PropTypes.string,
-    user: PropTypes.object,
-    username: PropTypes.string
-  })
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+    pathname: PropTypes.string,
+    search: PropTypes.string,
+    state: PropTypes.object
+  }).isRequired
 };
 
 export default GifCard;
