@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 
+const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
+const API_KEY = process.env.API_KEY;
+const SEARCH_URL = `${BASE_GIPHY_URL}/search?api_key=${API_KEY}`;
+
 const defaultState = {
   searchValue: "Search"
 };
@@ -42,11 +46,23 @@ class Search extends Component {
     }
   };
 
+  handleSubmit = async event => {
+    event.preventDefault();
+    const {searchValue} = this.state;
+
+    const giphyResult = await fetch(`${SEARCH_URL}&q=${searchValue}`).then(response => response.json());
+
+    console.log('giphyResult is ', giphyResult)
+
+    this.setState(defaultState);
+
+  }
+
   render() {
     const { searchValue } = this.state;
     return (
       <div className="search-container">
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             value={searchValue}
