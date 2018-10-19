@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-
-const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
-const API_KEY = process.env.API_KEY;
-const SEARCH_URL = `${BASE_GIPHY_URL}/search?api_key=${API_KEY}`;
+import { makeGiphySearchRequest } from "../../../services/giphy/index.js";
 
 const defaultState = {
   searchValue: "Search"
@@ -50,11 +47,9 @@ class Search extends Component {
     event.preventDefault();
     const { searchValue } = this.state;
 
-    const giphyResult = await fetch(`${SEARCH_URL}&q=${searchValue}`).then(
-      response => response.json()
-    );
+    const giphyResult = await makeGiphySearchRequest(searchValue);
 
-    console.log("giphyResult is ", giphyResult);
+    console.log("modified giphyResult is ", giphyResult);
 
     this.setState(defaultState);
   };

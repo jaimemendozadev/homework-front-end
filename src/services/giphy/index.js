@@ -2,7 +2,7 @@
 const BASE_GIPHY_URL = process.env.BASE_GIPHY_URL;
 const API_KEY = process.env.API_KEY;
 const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}`;
-
+const SEARCH_URL = `${BASE_GIPHY_URL}/search?api_key=${API_KEY}`;
 
 export const makeInitialGiphyRequest = async () => {
   const giphyResponse = await fetch(REQ_URL).then(response => response.json());
@@ -10,6 +10,13 @@ export const makeInitialGiphyRequest = async () => {
   return giphyResponse;
 };
 
+export const makeGiphySearchRequest = async searchValue => {
+  const giphyResult = await fetch(`${SEARCH_URL}&q=${searchValue}`).then(
+    response => response.json()
+  );
+
+  return giphyResult;
+};
 
 export const handleScroll = state => {
   const { scrolling, totalCount, offset } = state;
