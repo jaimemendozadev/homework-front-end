@@ -1,9 +1,12 @@
 /* no-unused-vars: "warn" */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import styles from "./sass/_styles.scss";
 import GifView from "./components/GifView/index.jsx";
 import Search from "./components/Search/index.jsx";
+import { appLoaded } from "../services/redux/actions/index.js";
+
 import {
   handleScroll,
   fetchGifs,
@@ -41,7 +44,7 @@ class App extends Component {
   };
 
   invokeHandleScroll = event => {
-    // handleScroll checks window dimensions and if 
+    // handleScroll checks window dimensions and if
     // user reaches bottom of page, loadMore() gifs
     const loadMore = handleScroll(this.state);
 
@@ -76,6 +79,8 @@ class App extends Component {
   render() {
     const { gifData } = this.state;
 
+    console.log("this.props inside App ", this.props);
+
     return (
       <div className="app-container">
         <div className="top-half">
@@ -99,4 +104,11 @@ App.propTypes = {
   }).isRequired
 };
 
-export default App;
+const mapStateToProps = ({ appStatus }) => ({
+  appStarted: appStatus.appStarted
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(App);
