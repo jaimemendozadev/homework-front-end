@@ -9,8 +9,8 @@ import { appLoaded } from "../services/redux/actions/index.js";
 
 import {
   handleScroll,
-  fetchGifs,
-  makeInitialGiphyRequest
+  updateGifFeed,
+  makeGiphyRequest
 } from "../services/giphy/index.js";
 
 const defaultState = {
@@ -27,8 +27,8 @@ class App extends Component {
   }
 
   setGifState = async () => {
-    // get more Gifs and set in state
-    const giphyResult = await fetchGifs(this.state);
+    // get more trending Gifs and setState
+    const giphyResult = await updateGifFeed(this.state);
 
     this.setState(giphyResult);
   };
@@ -54,22 +54,19 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
-    // On CDM, make initialGiphyReq
-    const giphyResponse = await makeInitialGiphyRequest();
-
-    const { data, pagination } = giphyResponse;
-    const { total_count: totalCount, offset } = pagination;
+    const { appStarted } = this.props;
 
     // Add event listener when user scrolls to bottom of page
     window.addEventListener("scroll", this.invokeHandleScroll);
 
-    // console.log("totalCount is ", totalCount);
+    // On CDM, if app hasn't started, make initialGiphyReq
+    if (appStarted === false) {
+      const initialState = await makeGiphyRequest();
 
-    this.setState({
-      gifData: data,
-      totalCount,
-      offset
-    });
+      console.log("initialState inside App CDM ", initialState);
+
+      this.setState(initialState);
+    }
   };
 
   componentWillUnmount = () => {

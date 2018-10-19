@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { makeGiphySearchRequest } from "../../../services/giphy/index.js";
+import { connect } from "react-redux";
+import { makeGiphyRequest } from "../../../services/giphy/index.js";
+import { getGiphySearchResults } from "../../../services/redux/actions/index.js";
 
 const defaultState = {
   searchValue: "Search"
@@ -44,14 +46,15 @@ class Search extends Component {
   };
 
   handleSubmit = async event => {
+    const { GetGiphySearchResults } = this.props;
+
     event.preventDefault();
     const { searchValue } = this.state;
 
-    const giphyResult = await makeGiphySearchRequest(searchValue);
+    const giphyResult = await makeGiphyRequest(searchValue);
 
-    console.log("modified giphyResult is ", giphyResult);
-
-    this.setState(defaultState);
+    // Reset the Form input and pass giphyResult to Redux store
+    this.setState(defaultState, () => GetGiphySearchResults(giphyResult));
   };
 
   render() {
@@ -72,4 +75,7 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default connect(
+  null,
+  { GetGiphySearchResults: getGiphySearchResults }
+)(Search);
