@@ -54,7 +54,7 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
-    const { appStarted } = this.props;
+    const { appStarted, AppLoaded } = this.props;
 
     // Add event listener when user scrolls to bottom of page
     window.addEventListener("scroll", this.invokeHandleScroll);
@@ -63,9 +63,10 @@ class App extends Component {
     if (appStarted === false) {
       const initialState = await makeGiphyRequest();
 
-      console.log("initialState inside App CDM ", initialState);
+      // set appStarted flag in Redux store to true
+      initialState.appStarted = true;
 
-      this.setState(initialState);
+      AppLoaded(initialState);
     }
   };
 
@@ -107,5 +108,5 @@ const mapStateToProps = ({ appStatus }) => ({
 
 export default connect(
   mapStateToProps,
-  null
+  { AppLoaded: appLoaded }
 )(App);

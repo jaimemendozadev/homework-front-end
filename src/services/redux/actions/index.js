@@ -1,10 +1,8 @@
 import { INIT_APP, GET_SEARCH_RESULTS } from "./types.js";
 
-export const appLoaded = () => ({
+export const appLoaded = payload => ({
   type: INIT_APP,
-  payload: {
-    appStarted: true
-  }
+  payload
 });
 
 export const getGiphySearchResults = responsePayload => ({
