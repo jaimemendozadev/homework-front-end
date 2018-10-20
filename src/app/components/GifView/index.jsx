@@ -25,9 +25,9 @@ class GifView extends Component {
 
     const currentLayout = setCurrentLayout(width);
 
-    console.log("currentLayout is ", currentLayout);
+    const newState = { width, height, currentLayout };
 
-    this.setState({ width, height, currentLayout });
+    this.setState(newState);
   };
 
   componentDidMount = () => {
@@ -43,7 +43,6 @@ class GifView extends Component {
     const { gifData } = this.props;
     const { currentLayout } = this.state;
 
-    console.log("incoming gifData ", gifData);
     return (
       <div className={`gifview-container ${currentLayout}`}>
         {gifData.length === 0 ? null : this.renderGifs(gifData, currentLayout)}

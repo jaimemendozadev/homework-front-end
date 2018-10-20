@@ -1,4 +1,4 @@
-import { INIT_APP } from "../../actions/types.js";
+import { INIT_APP, UPDATE_TRENDING_RESULTS } from "../../actions/types.js";
 
 const defaultTrendingResultsState = {
   gifData: [],
@@ -11,6 +11,9 @@ const trendingResults = (state = defaultTrendingResultsState, action) => {
   switch (action.type) {
     case INIT_APP:
       return Object.assign({}, state, action.payload.giphyResults);
+
+    case UPDATE_TRENDING_RESULTS:
+      return Object.assign({}, state, action.payload);
 
     default:
       return state;

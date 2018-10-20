@@ -4,9 +4,7 @@ const API_KEY = process.env.API_KEY;
 const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}`;
 const SEARCH_URL = `${BASE_GIPHY_URL}/search?api_key=${API_KEY}`;
 
-export const handleScroll = state => {
-  const { scrolling, totalCount, offset } = state;
-
+export const handleScroll = ({ scrolling, totalCount, offset }) => {
   if (scrolling) return;
   if (offset >= totalCount) return;
 
@@ -45,21 +43,30 @@ export const makeGiphyRequest = async (searchValue = null) => {
 };
 
 // Need to update REQ_URL for searching
-export const updateGifFeed = async ({ offset, gifData }) => {
-  const reqURL = `${REQ_URL}&offset=${offset}`;
+export const updateGifFeed = async (offset, gifData) => {
+  try {
+    const reqURL = `${REQ_URL}&offset=${offset}`;
 
-  const giphyResponse = await fetch(reqURL)
-    .then(response => response.json())
-    .catch(error => console.log("error fetching ", error));
+    const giphyResponse = await fetch(reqURL).then(response => response.json());
 
-  const { data, pagination } = giphyResponse;
-  const { totalCount } = pagination;
+    const { data, pagination } = giphyResponse;
+    const { totalCount } = pagination;
 
-  const newState = {
-    gifData: [...gifData, ...data],
-    totalCount,
-    scrolling: false
-  };
+    const lastIdx = gifData.length - 1;
+    const filteredID = gifData[lastIdx].id;
+    const firstGifID = data[0].id;
 
-  return newState;
+    // Sanitize old gifData to avoid getting dupe gif data objects
+    const sanitized = filteredID === firstGifID ? gifData.pop() : gifData;
+
+    const newState = {
+      gifData: [...sanitized, ...data],
+      totalCount,
+      scrolling: false
+    };
+
+    return newState;
+  } catch (error) {
+    return { isError: true, status: "There was a problem fetching the Gifs." };
+  }
 };

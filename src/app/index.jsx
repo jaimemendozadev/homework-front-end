@@ -5,7 +5,10 @@ import { connect } from "react-redux";
 import styles from "./sass/_styles.scss";
 import GifView from "./components/GifView/index.jsx";
 import Search from "./components/Search/index.jsx";
-import { appLoaded } from "../services/redux/actions/index.js";
+import {
+  appLoaded,
+  updateTrendingResults
+} from "../services/redux/actions/index.js";
 
 import {
   handleScroll,
@@ -26,14 +29,38 @@ class App extends Component {
     this.state = defaultState;
   }
 
-  setGifState = async () => {
+  handleGifView = () => {
+    const {
+      appStarted,
+      inSearchMode,
+      inTrendingMode,
+      trendingResults,
+      searchResults
+    } = this.props;
+
+    if (appStarted === true) {
+      const gifData =
+        inTrendingMode === true
+          ? trendingResults.gifData
+          : searchResults.gifData;
+      return <GifView gifData={gifData} />;
+    }
+    return <h1>Loading data ...</h1>;
+  };
+
+  setGifState = async currentState => {
     // get more trending Gifs and setState
-    const giphyResult = await updateGifFeed(this.state);
+    const giphyResult = await updateGifFeed(currentState);
 
     this.setState(giphyResult);
   };
 
-  loadMore = () => {
+  loadMore = async () => {
+    const {
+      inTrendingMode,
+      trendingResults: { offset, gifData },
+      UpdateTrendingResults
+    } = this.props;
     /*
     this.setState(
       prevState => ({
@@ -43,12 +70,30 @@ class App extends Component {
       this.setGifState
     );
     */
+
+    if (inTrendingMode === true) {
+      const giphyResult = await updateGifFeed(offset, gifData);
+
+      UpdateTrendingResults(giphyResult);
+    }
   };
 
-  invokeHandleScroll = event => {
+  invokeHandleScroll = () => {
+    const {
+      trendingResults,
+      searchResults,
+      inTrendingMode,
+      inSearchMode
+    } = this.props;
+
     // handleScroll checks window dimensions and if
     // user reaches bottom of page, loadMore() gifs
-    const loadMore = handleScroll(this.state);
+
+    const toUpdate = inTrendingMode === true ? trendingResults : searchResults;
+
+    console.log("toUpdate is ", toUpdate);
+
+    const loadMore = handleScroll(toUpdate);
 
     if (loadMore === true) {
       this.loadMore();
@@ -77,8 +122,6 @@ class App extends Component {
   };
 
   render() {
-    const { gifData } = this.state;
-
     console.log("this.props inside App ", this.props);
 
     return (
@@ -89,38 +132,50 @@ class App extends Component {
 
         <Search />
 
-        <GifView gifData={gifData} />
+        {this.handleGifView()}
       </div>
     );
   }
 }
 
 App.propTypes = {
-  location: PropTypes.shape({
-    hash: PropTypes.string,
-    pathname: PropTypes.string,
-    search: PropTypes.string,
-    state: PropTypes.object
-  }).isRequired,
   appStarted: PropTypes.bool.isRequired,
   inSearchMode: PropTypes.bool.isRequired,
   inTrendingMode: PropTypes.bool.isRequired,
+
+  AppLoaded: PropTypes.func.isRequired,
+  UpdateTrendingResults: PropTypes.func.isRequired,
+
   trendingResults: PropTypes.shape({
     gifData: PropTypes.array,
     offset: PropTypes.number,
     totalCount: PropTypes.number,
     scrolling: PropTypes.bool
+  }).isRequired,
+
+  searchResults: PropTypes.shape({
+    gifData: PropTypes.array,
+    offset: PropTypes.number,
+    totalCount: PropTypes.number
+  }).isRequired,
+
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+    pathname: PropTypes.string,
+    search: PropTypes.string,
+    state: PropTypes.object
   }).isRequired
 };
 
-const mapStateToProps = ({ appStatus, trendingResults }) => ({
+const mapStateToProps = ({ appStatus, trendingResults, searchResults }) => ({
   appStarted: appStatus.appStarted,
   inSearchMode: appStatus.inSearchMode,
   inTrendingMode: appStatus.inTrendingMode,
-  trendingResults
+  trendingResults,
+  searchResults
 });
 
 export default connect(
   mapStateToProps,
-  { AppLoaded: appLoaded }
+  { AppLoaded: appLoaded, UpdateTrendingResults: updateTrendingResults }
 )(App);
