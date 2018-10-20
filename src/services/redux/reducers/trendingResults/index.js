@@ -1,7 +1,8 @@
 import {
   INIT_APP,
   UPDATE_TRENDING_RESULTS,
-  SCROLLING_TRUE
+  SCROLLING_TRUE,
+  SWITCH_TO_SEARCH_MODE
 } from "../../actions/types.js";
 
 const defaultTrendingResultsState = {
@@ -21,6 +22,9 @@ const trendingResults = (state = defaultTrendingResultsState, action) => {
 
     case UPDATE_TRENDING_RESULTS:
       return action.payload;
+
+    case SWITCH_TO_SEARCH_MODE:
+      return Object.assign({}, state, action.payload.appStatus);
 
     default:
       return state;

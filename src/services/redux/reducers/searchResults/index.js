@@ -1,4 +1,8 @@
-import { GET_SEARCH_RESULTS, SCROLLING_TRUE } from "../../actions/types.js";
+import {
+  GET_SEARCH_RESULTS,
+  SCROLLING_TRUE,
+  SWITCH_TO_SEARCH_MODE
+} from "../../actions/types.js";
 
 const defaultSearchResultsState = {
   gifData: [],
@@ -11,6 +15,9 @@ const searchResults = (state = defaultSearchResultsState, action) => {
   switch (action.type) {
     case GET_SEARCH_RESULTS:
       return action.payload;
+
+    case SWITCH_TO_SEARCH_MODE:
+      return action.payload.giphyResults;
 
     case SCROLLING_TRUE:
       return Object.assign({}, state, action.payload);

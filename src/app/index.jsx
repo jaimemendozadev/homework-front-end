@@ -16,7 +16,6 @@ class App extends Component {
   handleGifView = () => {
     const {
       appStarted,
-      inSearchMode,
       inTrendingMode,
       trendingResults,
       searchResults
@@ -50,6 +49,10 @@ class App extends Component {
         // Fire action that updates scrolling and fetches more data
         LoadMoreTrendingData(trendingResults);
       }
+
+      if (inSearchMode === true) {
+        // do something
+      }
     }
   };
 
@@ -65,8 +68,13 @@ class App extends Component {
 
       const giphyResults = await makeInitGiphyReq(null, 0);
 
+      // Tell Redux store app is currently inTrending Mode
       initialState.giphyResults = giphyResults;
-      initialState.appStatus = { appStarted: true, inTrendingMode: true };
+      initialState.appStatus = {
+        appStarted: true,
+        inTrendingMode: true,
+        inSearchMode: false
+      };
 
       AppLoaded(initialState);
     }
@@ -110,7 +118,8 @@ App.propTypes = {
   searchResults: PropTypes.shape({
     gifData: PropTypes.array,
     offset: PropTypes.number,
-    totalCount: PropTypes.number
+    totalCount: PropTypes.number,
+    scrolling: PropTypes.bool
   }).isRequired,
 
   location: PropTypes.shape({

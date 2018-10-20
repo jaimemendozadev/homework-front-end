@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { makeInitGiphyReq } from "../../../services/giphy/index.js";
-import { getGiphySearchResults } from "../../../services/redux/actions/index.js";
+import { switchToSearchMode } from "../../../services/redux/actions/index.js";
 
 const defaultState = {
   searchValue: "Search"
@@ -46,15 +47,19 @@ class Search extends Component {
   };
 
   handleSubmit = async event => {
-    const { GetGiphySearchResults } = this.props;
+    const { SwitchToSearchMode } = this.props;
+    const searchState = {};
 
     event.preventDefault();
     const { searchValue } = this.state;
 
-    const giphyResult = await makeInitGiphyReq(searchValue, 0);
+    const giphyResults = await makeInitGiphyReq(searchValue, 0);
 
-    // Reset the Form input and pass giphyResult to Redux store
-    this.setState(defaultState, () => GetGiphySearchResults(giphyResult));
+    // Tell Redux app is now inSearchMode and pass searchState to store
+    searchState.giphyResults = giphyResults;
+    searchState.appStatus = { inSearchMode: true, inTrendingMode: false };
+
+    this.setState(defaultState, () => SwitchToSearchMode(searchState));
   };
 
   render() {
@@ -75,7 +80,11 @@ class Search extends Component {
   }
 }
 
+Search.propTypes = {
+  SwitchToSearchMode: PropTypes.func.isRequired
+};
+
 export default connect(
   null,
-  { GetGiphySearchResults: getGiphySearchResults }
+  { SwitchToSearchMode: switchToSearchMode }
 )(Search);
