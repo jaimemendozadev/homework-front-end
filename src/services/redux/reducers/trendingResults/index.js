@@ -13,7 +13,7 @@ const trendingResults = (state = defaultTrendingResultsState, action) => {
       return Object.assign({}, state, action.payload.giphyResults);
 
     case UPDATE_TRENDING_RESULTS:
-      return Object.assign({}, state, action.payload);
+      return action.payload;
 
     default:
       return state;

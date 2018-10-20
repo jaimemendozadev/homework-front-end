@@ -58,21 +58,25 @@ class App extends Component {
   loadMore = async () => {
     const {
       inTrendingMode,
-      trendingResults: { offset, gifData },
+      trendingResults,
       UpdateTrendingResults
     } = this.props;
+
     /*
-    this.setState(
+      this.setState(
       prevState => ({
         offset: prevState.offset + 25,
         scrolling: true
       }),
-      this.setGifState
+      this.fetchGifs
     );
     */
 
     if (inTrendingMode === true) {
-      const giphyResult = await updateGifFeed(offset, gifData);
+      const { offset, gifData } = trendingResults;
+
+      const newOffSet = offset + 25;
+      const giphyResult = await updateGifFeed(newOffSet, gifData);
 
       UpdateTrendingResults(giphyResult);
     }
@@ -90,8 +94,6 @@ class App extends Component {
     // user reaches bottom of page, loadMore() gifs
 
     const toUpdate = inTrendingMode === true ? trendingResults : searchResults;
-
-    console.log("toUpdate is ", toUpdate);
 
     const loadMore = handleScroll(toUpdate);
 
@@ -122,8 +124,6 @@ class App extends Component {
   };
 
   render() {
-    console.log("this.props inside App ", this.props);
-
     return (
       <div className="app-container">
         <div className="top-half">

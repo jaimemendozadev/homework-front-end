@@ -4,6 +4,22 @@ const API_KEY = process.env.API_KEY;
 const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}`;
 const SEARCH_URL = `${BASE_GIPHY_URL}/search?api_key=${API_KEY}`;
 
+const analyzeData = (dataSet1, dataSet2) => {
+  const dupes = [];
+
+  const firstDataSet = new Set();
+
+  dataSet1.forEach(obj => firstDataSet.add(obj.id));
+
+  dataSet2.forEach(obj => {
+    if (firstDataSet.has(obj.id)) {
+      dupes.push(obj.id);
+    }
+  });
+
+  console.log("dupes are ", dupes);
+};
+
 export const handleScroll = ({ scrolling, totalCount, offset }) => {
   if (scrolling) return;
   if (offset >= totalCount) return;
@@ -26,7 +42,7 @@ export const makeGiphyRequest = async (searchValue = null) => {
     response.json()
   );
 
-  console.log("giphyResponse is ", giphyResponse);
+  // console.log("giphyResponse is ", giphyResponse);
 
   const { data, pagination } = giphyResponse;
   const { total_count: totalCount, offset } = pagination;
@@ -43,14 +59,16 @@ export const makeGiphyRequest = async (searchValue = null) => {
 };
 
 // Need to update REQ_URL for searching
-export const updateGifFeed = async (offset, gifData) => {
+export const updateGifFeed = async (newOffset, gifData) => {
   try {
-    const reqURL = `${REQ_URL}&offset=${offset}`;
+    const reqURL = `${REQ_URL}&offset=${newOffset}`;
 
     const giphyResponse = await fetch(reqURL).then(response => response.json());
 
+    console.log("giphyResponse inside updateGifFeed ", giphyResponse);
+
     const { data, pagination } = giphyResponse;
-    const { totalCount } = pagination;
+    const { total_count, offset } = pagination;
 
     const lastIdx = gifData.length - 1;
     const filteredID = gifData[lastIdx].id;
@@ -59,9 +77,14 @@ export const updateGifFeed = async (offset, gifData) => {
     // Sanitize old gifData to avoid getting dupe gif data objects
     const sanitized = filteredID === firstGifID ? gifData.pop() : gifData;
 
+    console.log("filteredID === firstGifID ", filteredID === firstGifID);
+
+    analyzeData(gifData, data);
+
     const newState = {
       gifData: [...sanitized, ...data],
-      totalCount,
+      totalCount: total_count,
+      offset,
       scrolling: false
     };
 
