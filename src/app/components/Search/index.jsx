@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { makeGiphyRequest } from "../../../services/giphy/index.js";
+import { makeInitGiphyReq } from "../../../services/giphy/index.js";
 import { getGiphySearchResults } from "../../../services/redux/actions/index.js";
 
 const defaultState = {
@@ -51,7 +51,7 @@ class Search extends Component {
     event.preventDefault();
     const { searchValue } = this.state;
 
-    const giphyResult = await makeGiphyRequest(searchValue);
+    const giphyResult = await makeInitGiphyReq(searchValue, 0);
 
     // Reset the Form input and pass giphyResult to Redux store
     this.setState(defaultState, () => GetGiphySearchResults(giphyResult));
