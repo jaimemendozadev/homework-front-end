@@ -10,7 +10,7 @@ const defaultTrendingResultsState = {
 const trendingResults = (state = defaultTrendingResultsState, action) => {
   switch (action.type) {
     case INIT_APP:
-      return Object.assign({}, state, action.payload);
+      return Object.assign({}, state, action.payload.giphyResults);
 
     default:
       return state;

@@ -34,6 +34,7 @@ class App extends Component {
   };
 
   loadMore = () => {
+    /*
     this.setState(
       prevState => ({
         offset: prevState.offset + 25,
@@ -41,6 +42,7 @@ class App extends Component {
       }),
       this.setGifState
     );
+    */
   };
 
   invokeHandleScroll = event => {
@@ -64,7 +66,7 @@ class App extends Component {
       const initialState = await makeGiphyRequest();
 
       // set appStarted flag in Redux store to true
-      initialState.appStarted = true;
+      initialState.appStatus = { appStarted: true, inTrendingMode: true };
 
       AppLoaded(initialState);
     }
@@ -99,11 +101,23 @@ App.propTypes = {
     pathname: PropTypes.string,
     search: PropTypes.string,
     state: PropTypes.object
+  }).isRequired,
+  appStarted: PropTypes.bool.isRequired,
+  inSearchMode: PropTypes.bool.isRequired,
+  inTrendingMode: PropTypes.bool.isRequired,
+  trendingResults: PropTypes.shape({
+    gifData: PropTypes.array,
+    offset: PropTypes.number,
+    totalCount: PropTypes.number,
+    scrolling: PropTypes.bool
   }).isRequired
 };
 
-const mapStateToProps = ({ appStatus }) => ({
-  appStarted: appStatus.appStarted
+const mapStateToProps = ({ appStatus, trendingResults }) => ({
+  appStarted: appStatus.appStarted,
+  inSearchMode: appStatus.inSearchMode,
+  inTrendingMode: appStatus.inTrendingMode,
+  trendingResults
 });
 
 export default connect(

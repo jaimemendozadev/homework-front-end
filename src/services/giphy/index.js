@@ -34,9 +34,11 @@ export const makeGiphyRequest = async (searchValue = null) => {
   const { total_count: totalCount, offset } = pagination;
 
   const newState = {
-    gifData: data,
-    totalCount,
-    offset
+    giphyResults: {
+      gifData: data,
+      totalCount,
+      offset
+    }
   };
 
   return newState;
