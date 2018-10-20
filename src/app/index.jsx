@@ -16,19 +16,7 @@ import {
   makeGiphyRequest
 } from "../services/giphy/index.js";
 
-const defaultState = {
-  gifData: [],
-  offset: null,
-  totalCount: null,
-  scrolling: false
-};
-
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = defaultState;
-  }
-
   handleGifView = () => {
     const {
       appStarted,
@@ -46,13 +34,6 @@ class App extends Component {
       return <GifView gifData={gifData} />;
     }
     return <h1>Loading data ...</h1>;
-  };
-
-  setGifState = async currentState => {
-    // get more trending Gifs and setState
-    const giphyResult = await updateGifFeed(currentState);
-
-    this.setState(giphyResult);
   };
 
   loadMore = async () => {
@@ -124,6 +105,8 @@ class App extends Component {
   };
 
   render() {
+    console.log("this.props inside App ", this.props);
+
     return (
       <div className="app-container">
         <div className="top-half">

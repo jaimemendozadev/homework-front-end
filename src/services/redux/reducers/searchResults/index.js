@@ -10,7 +10,7 @@ const defaultSearchResultsState = {
 const searchResults = (state = defaultSearchResultsState, action) => {
   switch (action.type) {
     case GET_SEARCH_RESULTS:
-      return Object.assign({}, state, action.payload);
+      return action.payload;
 
     default:
       return state;
