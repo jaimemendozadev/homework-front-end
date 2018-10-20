@@ -70,10 +70,6 @@ class App extends Component {
       inTrendingMode,
       inSearchMode
     } = this.props;
-
-    // handleScroll checks window dimensions and if
-    // user reaches bottom of page, loadMore() gifs
-
     const toUpdate = inTrendingMode === true ? trendingResults : searchResults;
 
     const loadMore = handleScroll(toUpdate);
@@ -91,9 +87,11 @@ class App extends Component {
 
     // On CDM, if app hasn't started, make initialGiphyReq
     if (appStarted === false) {
-      const initialState = await makeGiphyRequest();
+      const initialState = {};
 
-      // set appStarted flag in Redux store to true
+      const giphyResults = await makeGiphyRequest();
+
+      initialState.giphyResults = giphyResults;
       initialState.appStatus = { appStarted: true, inTrendingMode: true };
 
       AppLoaded(initialState);
