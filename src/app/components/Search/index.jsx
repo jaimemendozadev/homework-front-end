@@ -64,6 +64,9 @@ class Search extends Component {
     searchState.giphyResults = giphyResults;
     searchState.giphyResults.gifIDSet = gifIDSet;
 
+    // Save searchValue for Redux store and infinite scroll requests
+    searchState.giphyResults.searchValue = searchValue;
+
     // Tell Redux app is now inSearchMode and pass searchState to store
     searchState.appStatus = { inSearchMode: true, inTrendingMode: false };
 

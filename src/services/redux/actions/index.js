@@ -2,9 +2,7 @@ import {
   INIT_APP,
   GET_SEARCH_RESULTS,
   UPDATE_TRENDING_RESULTS,
-  SCROLLING_TRUE,
-  SWITCH_TO_SEARCH_MODE,
-  SWITCH_TO_TRENDING_MODE
+  SWITCH_TO_SEARCH_MODE
 } from "./types.js";
 
 import { updateGifFeed } from "../../giphy/index.js";
@@ -19,36 +17,45 @@ export const switchToSearchMode = payload => ({
   payload
 });
 
-export const loadMoreData = oldState => {
-  const { offset, gifData, gifIDSet } = oldState;
-  const newOffSet = offset + 25;
+export const loadMoreData = (
+  searchValue = null,
+  newOffSet,
+  gifData,
+  gifIDSet,
+  actionTypes
+) => async dispatch => {
+  dispatch({ type: actionTypes.scroll, payload: { scrolling: true } });
+  const giphyResult = await updateGifFeed(searchValue, newOffSet, gifData);
 
-  return async dispatch => {
-    dispatch({ type: SCROLLING_TRUE, payload: { scrolling: true } });
-    const giphyResult = await updateGifFeed(null, newOffSet, gifData);
+  // Use gifIDSet to sanitize gifData & avoid getting dupe gif data objects
+  const filteredGifs = giphyResult.gifData.map(gif => {
+    const { id } = gif;
 
-    // Use gifIDSet to sanitize gifData & avoid getting dupe gif data objects
-    const filteredGifs = giphyResult.gifData.map(gif => {
-      const { id } = gif;
+    if (!gifIDSet[id]) {
+      gifIDSet[id] = true;
 
-      if (!gifIDSet[id]) {
-        gifIDSet[id] = true;
+      return gif;
+    }
+  });
 
-        return gif;
-      }
-    });
+  // Merge old gifData and filteredGifs
+  giphyResult.gifData = [...gifData, ...filteredGifs];
 
-    // Merge old gifData and filteredGifs
-    giphyResult.gifData = [...gifData, ...filteredGifs];
+  // Add updated gifIDSet to Redux
+  giphyResult.gifIDSet = gifIDSet;
 
-    // Add updated gifIDSet to Redux
-    giphyResult.gifIDSet = gifIDSet;
+  // Reattach searchValue
+  if (searchValue !== null) {
+    giphyResult.searchValue = searchValue;
+  }
 
-    dispatch({
-      type: UPDATE_TRENDING_RESULTS,
-      payload: giphyResult
-    });
-  };
+  const actionObject = {};
+  actionObject.type = actionTypes.type;
+
+  // Attach giphyResult to actionTypes and dispatch
+  actionObject.payload = giphyResult;
+
+  dispatch(actionObject);
 };
 
 export const getGiphySearchResults = responsePayload => ({

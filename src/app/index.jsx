@@ -6,7 +6,12 @@ import styles from "./sass/_styles.scss";
 import GifView from "./components/GifView/index.jsx";
 import Search from "./components/Search/index.jsx";
 import { appLoaded, loadMoreData } from "../services/redux/actions/index.js";
-
+import {
+  UPDATE_TRENDING_RESULTS,
+  UPDATE_SEARCH_RESULTS,
+  SEARCH_SCROLLING_TRUE,
+  TRENDING_SCROLLING_TRUE
+} from "../services/redux/actions/types.js";
 import { handleScroll, makeInitRequest } from "../services/giphy/index.js";
 
 class App extends Component {
@@ -34,7 +39,7 @@ class App extends Component {
       searchResults,
       inTrendingMode,
       inSearchMode,
-      loadMoreData
+      LoadMoreData
     } = this.props;
     const toUpdate = inTrendingMode === true ? trendingResults : searchResults;
 
@@ -43,12 +48,27 @@ class App extends Component {
 
     if (loadMore === true) {
       if (inTrendingMode === true) {
-        // Fire action that updates scrolling and fetches more data
-        loadMoreData(trendingResults);
-      }
+        const { offset, gifData, gifIDSet } = trendingResults;
+        const newOffSet = offset + 25;
+        const action = {
+          scroll: TRENDING_SCROLLING_TRUE,
+          type: UPDATE_TRENDING_RESULTS
+        };
 
-      if (inSearchMode === true) {
-        // do something
+        // Fire action that updates scrolling and fetches more data
+        LoadMoreData(null, newOffSet, gifData, gifIDSet, action);
+      } else {
+        // searchValue = null, urlOffset = 0, gifData
+
+        const { offset, gifData, gifIDSet, searchValue } = searchResults;
+        const newOffSet = offset + 25;
+
+        const action = {
+          scroll: SEARCH_SCROLLING_TRUE,
+          type: UPDATE_SEARCH_RESULTS
+        };
+
+        LoadMoreData(searchValue, newOffSet, gifData, gifIDSet, action);
       }
     }
   };
@@ -109,7 +129,7 @@ App.propTypes = {
   inSearchMode: PropTypes.bool.isRequired,
   inTrendingMode: PropTypes.bool.isRequired,
   AppLoaded: PropTypes.func.isRequired,
-  loadMoreData: PropTypes.func.isRequired,
+  LoadMoreData: PropTypes.func.isRequired,
 
   trendingResults: PropTypes.shape({
     gifData: PropTypes.array,
@@ -124,7 +144,8 @@ App.propTypes = {
     offset: PropTypes.number,
     totalCount: PropTypes.number,
     scrolling: PropTypes.bool,
-    gifIDSet: PropTypes.object
+    gifIDSet: PropTypes.object,
+    searchValue: PropTypes.string
   }).isRequired,
 
   location: PropTypes.shape({
@@ -147,6 +168,6 @@ export default connect(
   mapStateToProps,
   {
     AppLoaded: appLoaded,
-    loadMoreData
+    LoadMoreData: loadMoreData
   }
 )(App);

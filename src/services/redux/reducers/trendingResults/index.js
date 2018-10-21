@@ -1,7 +1,7 @@
 import {
   INIT_APP,
   UPDATE_TRENDING_RESULTS,
-  SCROLLING_TRUE,
+  TRENDING_SCROLLING_TRUE,
   SWITCH_TO_SEARCH_MODE,
   SWITCH_TO_TRENDING_MODE
 } from "../../actions/types.js";
@@ -19,7 +19,7 @@ const trendingResults = (state = defaultTrendingResultsState, action) => {
     case INIT_APP:
       return Object.assign({}, state, action.payload.giphyResults);
 
-    case SCROLLING_TRUE:
+    case TRENDING_SCROLLING_TRUE:
       return Object.assign({}, state, action.payload);
 
     case UPDATE_TRENDING_RESULTS:

@@ -56,26 +56,6 @@ const processResponse = (giphyResponse, oldState = null) => {
 
     return newState;
   }
-
-  // const lastIdx = oldState.length - 1;
-  // const filteredID = oldState[lastIdx].id;
-  // const firstGifID = preppredGifData[0].id;
-
-  // // Sanitize old oldState to avoid getting dupe gif data objects
-  // const sanitized = filteredID === firstGifID ? oldState.pop() : oldState;
-
-  // const newGifData = [].concat(sanitized, preppredGifData);
-
-  // console.log("newGifData inside processResponse ", newGifData);
-
-  // const newState = {
-  //   gifData: newGifData,
-  //   totalCount,
-  //   offset,
-  //   scrolling: false
-  // };
-
-  // return newState;
 };
 
 // makeInitRequest makes first request for trendingResults & searchResults
@@ -108,6 +88,10 @@ export const updateGifFeed = async (
     searchValue === null
       ? `${REQ_URL}${urlOffset}`
       : `${SEARCH_URL}${urlOffset}&q=${searchValue}`;
+
+  console.log("searchValue is ", searchValue);
+  console.log("URL using is ", URL);
+
   try {
     const giphyResponse = await fetch(URL).then(response => response.json());
 
