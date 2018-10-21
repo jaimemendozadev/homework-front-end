@@ -1,8 +1,17 @@
 .sorter-container {
-  height: 50px;
-  width: 50%;
-  border: 1px solid $grey-color;
+  height: 65px;
   display: flex;
+  align-items: center;
   justify-content: space-around;
   margin-bottom: 1.5em;
+
+  button {
+    height: 50px;
+    border: 1px solid $button-color;
+    color: $button-color;
+    background-color: white;
+    // padding: 1em;
+    border-radius: 5px;
+    font-size: 14px;
+  }
 }
