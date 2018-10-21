@@ -5,9 +5,7 @@ const API_KEY = process.env.API_KEY;
 const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}&offset=`;
 const SEARCH_URL = `${BASE_GIPHY_URL}/search?api_key=${API_KEY}&offset=`;
 
-const filterIDs = (oldData, newData) => {};
-
-export const prepGiphyStateForRedux = giphyResponse => {
+export const prepStateForRedux = giphyResponse => {
   const preppedGiphyState = giphyResponse.map(gif => {
     const gifObject = {};
 
@@ -41,11 +39,11 @@ export const handleScroll = ({ scrolling, totalCount, offset }) => {
   return pageOffset > lastImgOffset - bottomOffset;
 };
 
-const processGiphyResponse = (giphyResponse, oldState = null) => {
+const processResponse = (giphyResponse, oldState = null) => {
   const { data, pagination } = giphyResponse;
   const { total_count: totalCount, offset } = pagination;
 
-  const preppredGifData = prepGiphyStateForRedux(data);
+  const preppredGifData = prepStateForRedux(data);
 
   if (oldState === null) {
     const newState = {
@@ -67,7 +65,7 @@ const processGiphyResponse = (giphyResponse, oldState = null) => {
 
   const newGifData = [].concat(sanitized, preppredGifData);
 
-  console.log("newGifData inside processGiphyResponse ", newGifData);
+  console.log("newGifData inside processResponse ", newGifData);
 
   const newState = {
     gifData: newGifData,
@@ -79,8 +77,8 @@ const processGiphyResponse = (giphyResponse, oldState = null) => {
   return newState;
 };
 
-// makeInitGiphyReq makes first request for trendingResults & searchResults
-export const makeInitGiphyReq = async (searchValue = null, offset = 0) => {
+// makeInitRequest makes first request for trendingResults & searchResults
+export const makeInitRequest = async (searchValue = null, offset = 0) => {
   const requestURL =
     searchValue === null
       ? `${REQ_URL}${offset}`
@@ -91,7 +89,7 @@ export const makeInitGiphyReq = async (searchValue = null, offset = 0) => {
       response.json()
     );
 
-    return processGiphyResponse(giphyResponse);
+    return processResponse(giphyResponse);
   } catch (error) {
     return {
       isError: true,
@@ -115,7 +113,7 @@ export const updateGifFeed = async (
     const { data, pagination } = giphyResponse;
     const { total_count: totalCount, offset } = pagination;
 
-    const preppredGifData = prepGiphyStateForRedux(data);
+    const preppredGifData = prepStateForRedux(data);
 
     const newState = {
       gifData: preppredGifData,

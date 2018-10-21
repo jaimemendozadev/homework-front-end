@@ -7,7 +7,7 @@ import GifView from "./components/GifView/index.jsx";
 import Search from "./components/Search/index.jsx";
 import { appLoaded, loadMoreData } from "../services/redux/actions/index.js";
 
-import { handleScroll, makeInitGiphyReq } from "../services/giphy/index.js";
+import { handleScroll, makeInitRequest } from "../services/giphy/index.js";
 
 class App extends Component {
   handleGifView = () => {
@@ -64,7 +64,7 @@ class App extends Component {
       const initialState = {};
       const gifIDSet = {};
 
-      const giphyResults = await makeInitGiphyReq(null, 0);
+      const giphyResults = await makeInitRequest(null, 0);
 
       // create gifIDSet for Redux store to track gifs already seen
       giphyResults.gifData.forEach(({ id }) => (gifIDSet[id] = true));

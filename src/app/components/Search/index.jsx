@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { makeInitGiphyReq } from "../../../services/giphy/index.js";
+import { makeInitRequest } from "../../../services/giphy/index.js";
 import { switchToSearchMode } from "../../../services/redux/actions/index.js";
 
 const defaultState = {
@@ -53,9 +53,7 @@ class Search extends Component {
     event.preventDefault();
     const { searchValue } = this.state;
 
-    console.log("inside handleSubmit for form");
-
-    const giphyResults = await makeInitGiphyReq(searchValue, 0);
+    const giphyResults = await makeInitRequest(searchValue, 0);
 
     console.log("giphyResults for form ", giphyResults);
 
