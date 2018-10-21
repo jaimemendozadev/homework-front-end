@@ -6,7 +6,8 @@ import { setLayoutGifSize } from "../utils";
 
 const defaultState = {
   imgURL: Placeholder,
-  imgClassName: "gif-placeholder"
+  imgClassName: "gif-placeholder",
+  controller: null
 };
 
 console.log("PlaceHolder is ", Placeholder);
@@ -17,23 +18,36 @@ class GifPlaceHolder extends Component {
     this.state = defaultState;
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     const { gif, layout } = this.props;
 
-    // Create New Image
-    const fetchedGif = new Image();
+    const controller = new AbortController();
+    const mySignal = controller.signal;
 
+    
     // Get gif Image URL based on layout
-    fetchedGif.src = setLayoutGifSize(gif, layout);
+    const imgReqURL = setLayoutGifSize(gif, layout);
 
-    // Change imgURL and styling for fetched Gif
-    fetchedGif.onload = () => {
-      this.setState({
-        imgURL: fetchedGif.src,
-        imgClassName: "fetched-gif"
-      });
-    };
+    // Fetch the Image
+    const imageBlob = await fetch(imgReqURL, {mySignal}).then(response => response.blob());
+
+    const imgURL = URL.createObjectURL(imageBlob);
+
+    this.setState({
+      imgURL,
+      imgClassName: "fetched-gif",
+      controller
+    });
   };
+
+  componentWillUnmount = () => {
+    const {controller, imgURL} = this.state;
+    controller.abort();
+    console.log("Aborting image request...");
+
+    window.URL.revokeObjectURL(imgURL);
+
+  }
 
   render() {
     const { gif, layout } = this.props;

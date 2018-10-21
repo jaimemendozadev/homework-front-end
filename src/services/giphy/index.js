@@ -19,7 +19,7 @@ export const handleScroll = ({ scrolling, totalCount, offset }) => {
   return pageOffset > lastImgOffset - bottomOffset;
 };
 
-const processGifphyResponse = (giphyResponse, oldState = null) => {
+const processGiphyResponse = (giphyResponse, oldState = null) => {
   const { data, pagination } = giphyResponse;
   const { total_count: totalCount, offset } = pagination;
 
@@ -41,8 +41,12 @@ const processGifphyResponse = (giphyResponse, oldState = null) => {
   // Sanitize old oldState to avoid getting dupe gif data objects
   const sanitized = filteredID === firstGifID ? oldState.pop() : oldState;
 
+  const newGifData = [].concat(sanitized, data);
+
+  console.log('newGifData inside processGiphyResponse ', newGifData);
+
   const newState = {
-    gifData: [...sanitized, ...data],
+    gifData: newGifData,
     totalCount,
     offset,
     scrolling: false
@@ -63,7 +67,7 @@ export const makeInitGiphyReq = async (searchValue = null, offset = 0) => {
       response.json()
     );
 
-    return processGifphyResponse(giphyResponse);
+    return processGiphyResponse(giphyResponse);
   } catch (error) {
     return {
       isError: true,
@@ -85,6 +89,8 @@ export const updateGifFeed = async (
     const giphyResponse = await fetch(URL).then(response => response.json());
 
     console.log("giphyResponse inside updateGifFeed ", giphyResponse);
+    console.log('gifData inside updateGifFeed ', gifData)
+    console.log("\n");
 
     const { data, pagination } = giphyResponse;
     const { total_count: totalCount, offset } = pagination;
@@ -96,15 +102,21 @@ export const updateGifFeed = async (
     // Sanitize old gifData to avoid getting dupe gif data objects
     const sanitized = filteredID === firstGifID ? gifData.pop() : gifData;
 
+    const newGifData = [].concat(sanitized, data);
+
+    console.log('newGifData inside updateGifFeed ', newGifData)
+
     const newState = {
-      gifData: [...sanitized, ...data],
+      gifData: newGifData,
       totalCount,
       offset,
       scrolling: false
     };
 
     return newState;
+    
   } catch (error) {
+    console.log('error fetching the gifs ', error)
     return { isError: true, status: "There was a problem fetching the Gifs." };
   }
 };

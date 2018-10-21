@@ -53,7 +53,11 @@ class Search extends Component {
     event.preventDefault();
     const { searchValue } = this.state;
 
+    console.log('inside handleSubmit for form')
+
     const giphyResults = await makeInitGiphyReq(searchValue, 0);
+
+    console.log('giphyResults for form ', giphyResults)
 
     // Tell Redux app is now inSearchMode and pass searchState to store
     searchState.giphyResults = giphyResults;
