@@ -19,24 +19,32 @@ class GifPlaceHolder extends Component {
   componentDidMount = async () => {
     const { gif, layout } = this.props;
 
-    const controller = new AbortController();
-    const mySignal = controller.signal;
+    try {
+      const controller = new AbortController();
+      const mySignal = controller.signal;
 
-    // Get gif Image URL based on layout
-    const imgReqURL = setLayoutGifSize(gif, layout);
+      // Get gif Image URL based on layout
+      const imgReqURL = setLayoutGifSize(gif, layout);
 
-    // Fetch the Image
-    const imageBlob = await fetch(imgReqURL, { mySignal }).then(response =>
-      response.blob()
-    );
+      // Fetch the Image
+      const imageBlob = await fetch(imgReqURL, { mySignal }).then(response =>
+        response.blob()
+      );
 
-    const imgURL = URL.createObjectURL(imageBlob);
+      const imgURL = URL.createObjectURL(imageBlob);
 
-    this.setState({
-      imgURL,
-      imgClassName: "fetched-gif",
-      controller
-    });
+      this.setState({
+        imgURL,
+        imgClassName: "fetched-gif",
+        controller
+      });
+    } catch (error) {
+      console.log(
+        "There was an error setting the Giphy image in <GifPlaceHolder />",
+        error
+      );
+      this.setState(defaultState);
+    }
   };
 
   componentWillUnmount = () => {

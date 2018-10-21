@@ -69,7 +69,7 @@ class App extends Component {
 
       const giphyResults = await makeInitGiphyReq(null, 0);
 
-      // create gifIDSet for Redux store
+      // create gifIDSet for Redux store to track gifs already seen
       giphyResults.gifData.forEach(({ id }) => (gifIDSet[id] = true));
 
       // Tell Redux store app is currently inTrending Mode
@@ -118,14 +118,18 @@ App.propTypes = {
     gifData: PropTypes.array,
     offset: PropTypes.number,
     totalCount: PropTypes.number,
-    scrolling: PropTypes.bool
+    scrolling: PropTypes.bool,
+    import_datetime: PropTypes.string,
+    gifIDSet: PropTypes.object
   }).isRequired,
 
   searchResults: PropTypes.shape({
     gifData: PropTypes.array,
     offset: PropTypes.number,
     totalCount: PropTypes.number,
-    scrolling: PropTypes.bool
+    scrolling: PropTypes.bool,
+    import_datetime: PropTypes.string,
+    gifIDSet: PropTypes.object
   }).isRequired,
 
   location: PropTypes.shape({
