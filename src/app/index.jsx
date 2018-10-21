@@ -65,11 +65,17 @@ class App extends Component {
     // On CDM, if app hasn't started, make initialGiphyReq
     if (appStarted === false) {
       const initialState = {};
+      const gifIDSet = {};
 
       const giphyResults = await makeInitGiphyReq(null, 0);
 
+      // create gifIDSet for Redux store
+      giphyResults.gifData.forEach(({ id }) => (gifIDSet[id] = true));
+
       // Tell Redux store app is currently inTrending Mode
       initialState.giphyResults = giphyResults;
+      initialState.giphyResults.gifIDSet = gifIDSet;
+
       initialState.appStatus = {
         appStarted: true,
         inTrendingMode: true,

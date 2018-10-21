@@ -5,8 +5,9 @@ const API_KEY = process.env.API_KEY;
 const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}&offset=`;
 const SEARCH_URL = `${BASE_GIPHY_URL}/search?api_key=${API_KEY}&offset=`;
 
+const filterIDs = (oldData, newData) => {};
+
 export const prepGiphyStateForRedux = giphyResponse => {
-  
   const preppedGiphyState = giphyResponse.map(gif => {
     const gifObject = {};
 
@@ -76,9 +77,6 @@ const processGiphyResponse = (giphyResponse, oldState = null) => {
 
   return newState;
 };
-
-
-
 
 // makeInitGiphyReq makes first request for trendingResults & searchResults
 export const makeInitGiphyReq = async (searchValue = null, offset = 0) => {

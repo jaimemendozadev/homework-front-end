@@ -10,8 +10,6 @@ const defaultState = {
   controller: null
 };
 
-console.log("PlaceHolder is ", Placeholder);
-
 class GifPlaceHolder extends Component {
   constructor(props) {
     super(props);

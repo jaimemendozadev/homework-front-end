@@ -10,6 +10,7 @@ const defaultTrendingResultsState = {
   offset: 0,
   totalCount: null,
   scrolling: false,
+  import_datetime: "",
   gifIDSet: {}
 };
 

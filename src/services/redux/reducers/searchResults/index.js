@@ -8,7 +8,9 @@ const defaultSearchResultsState = {
   gifData: [],
   offset: 0,
   totalCount: null,
-  scrolling: false
+  scrolling: false,
+  import_datetime: "",
+  gifIDSet: {}
 };
 
 const searchResults = (state = defaultSearchResultsState, action) => {
