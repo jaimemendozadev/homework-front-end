@@ -5,8 +5,6 @@ const API_KEY = process.env.API_KEY;
 const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}&offset=`;
 const SEARCH_URL = `${BASE_GIPHY_URL}/search?api_key=${API_KEY}&offset=`;
 
-
-
 export const handleScroll = ({ scrolling, totalCount, offset }) => {
   if (scrolling) return; // See note below
   if (offset >= totalCount) return;
@@ -74,7 +72,7 @@ export const makeInitRequest = async (searchValue = null, offset = 0) => {
 
     return processResponse(giphyResponse);
   } catch (error) {
-    console.log("There was a problem making the intial request. ", error)
+    console.log("There was a problem making the intial request. ", error);
   }
 };
 
