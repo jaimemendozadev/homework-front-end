@@ -5,10 +5,7 @@ import { connect } from "react-redux";
 import styles from "./sass/_styles.scss";
 import GifView from "./components/GifView/index.jsx";
 import Search from "./components/Search/index.jsx";
-import {
-  appLoaded,
-  loadMoreTrendingData
-} from "../services/redux/actions/index.js";
+import { appLoaded, loadMoreData } from "../services/redux/actions/index.js";
 
 import { handleScroll, makeInitGiphyReq } from "../services/giphy/index.js";
 
@@ -37,7 +34,7 @@ class App extends Component {
       searchResults,
       inTrendingMode,
       inSearchMode,
-      LoadMoreTrendingData
+      loadMoreData
     } = this.props;
     const toUpdate = inTrendingMode === true ? trendingResults : searchResults;
 
@@ -47,7 +44,7 @@ class App extends Component {
     if (loadMore === true) {
       if (inTrendingMode === true) {
         // Fire action that updates scrolling and fetches more data
-        LoadMoreTrendingData(trendingResults);
+        loadMoreData(trendingResults);
       }
 
       if (inSearchMode === true) {
@@ -112,7 +109,7 @@ App.propTypes = {
   inSearchMode: PropTypes.bool.isRequired,
   inTrendingMode: PropTypes.bool.isRequired,
   AppLoaded: PropTypes.func.isRequired,
-  LoadMoreTrendingData: PropTypes.func.isRequired,
+  loadMoreData: PropTypes.func.isRequired,
 
   trendingResults: PropTypes.shape({
     gifData: PropTypes.array,
@@ -152,6 +149,6 @@ export default connect(
   mapStateToProps,
   {
     AppLoaded: appLoaded,
-    LoadMoreTrendingData: loadMoreTrendingData
+    loadMoreData
   }
 )(App);

@@ -18,7 +18,7 @@ export const switchToSearchMode = payload => ({
   payload
 });
 
-export const loadMoreTrendingData = oldState => {
+export const loadMoreData = oldState => {
   const { offset, gifData, gifIDSet } = oldState;
   const newOffSet = offset + 25;
 
