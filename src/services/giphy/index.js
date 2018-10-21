@@ -12,6 +12,7 @@ export const prepGiphyStateForRedux = giphyResponse => {
     const gifObject = {};
 
     gifObject.id = gif.id;
+    gifObject.url = gif.url;
     gifObject.title = gif.title;
     gifObject.username = gif.username;
     gifObject.images = {

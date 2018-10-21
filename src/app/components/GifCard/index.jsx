@@ -62,7 +62,7 @@ class GifCard extends Component {
           <div className="gifcard-gif-container">
             <img
               className={`gifcard-image ${imgClassName}`}
-              src={images.original.url}
+              src={images.original}
             />
           </div>
           {/* end gifcard-gif-container  */}
@@ -81,7 +81,8 @@ class GifCard extends Component {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                @{username}
+                @
+{username}
               </a>
             </h4>
           </div>
