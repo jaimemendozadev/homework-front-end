@@ -26,7 +26,10 @@ export const loadMoreTrendingData = oldState => {
     dispatch({ type: SCROLLING_TRUE, payload: { scrolling: true } });
     const giphyResult = await updateGifFeed(null, newOffSet, gifData);
 
-    console.log("final giphyResult pass to Redux in loadMoreTrendingData ", giphyResult)
+    console.log(
+      "final giphyResult pass to Redux in loadMoreTrendingData ",
+      giphyResult
+    );
 
     dispatch({
       type: UPDATE_TRENDING_RESULTS,

@@ -3,19 +3,19 @@
 export const setLayoutGifSize = (gif, currentLayout) => {
   // gif.images.fixed_height.url
   if (currentLayout === "mobile-layout") {
-    return `${gif.images.fixed_height.url}`;
+    return `${gif.images.fixed_height}`;
   }
 
   if (currentLayout === "tablet-layout") {
-    return `${gif.images.fixed_width.url}`;
+    return `${gif.images.fixed_width}`;
   }
 
   if (currentLayout === "desktop-layout") {
-    return `${gif.images.original.url}`;
+    return `${gif.images.original}`;
   }
 
   if (currentLayout === "GifCard") {
-    return `${gif.images.original.url}`;
+    return `${gif.images.original}`;
   }
 
   return "";

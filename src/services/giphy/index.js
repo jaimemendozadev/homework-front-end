@@ -5,6 +5,25 @@ const API_KEY = process.env.API_KEY;
 const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}&offset=`;
 const SEARCH_URL = `${BASE_GIPHY_URL}/search?api_key=${API_KEY}&offset=`;
 
+export const prepGiphyStateForRedux = giphyResponse => {
+  const preppedGiphyState = giphyResponse.map(gif => {
+    const gifObject = {};
+
+    gifObject.id = gif.id;
+    gifObject.title = gif.title;
+    gifObject.username = gif.username;
+    gifObject.images = {
+      fixed_height: gif.images.fixed_height.url,
+      fixed_width: gif.images.fixed_width.url,
+      original: gif.images.original.url
+    };
+
+    return gifObject;
+  });
+
+  return preppedGiphyState;
+};
+
 export const handleScroll = ({ scrolling, totalCount, offset }) => {
   if (scrolling) return; // See note below
   if (offset >= totalCount) return;
@@ -23,9 +42,11 @@ const processGiphyResponse = (giphyResponse, oldState = null) => {
   const { data, pagination } = giphyResponse;
   const { total_count: totalCount, offset } = pagination;
 
+  const preppredGifData = prepGiphyStateForRedux(data);
+
   if (oldState === null) {
     const newState = {
-      gifData: data,
+      gifData: preppredGifData,
       totalCount,
       offset,
       scrolling: false
@@ -36,14 +57,14 @@ const processGiphyResponse = (giphyResponse, oldState = null) => {
 
   const lastIdx = oldState.length - 1;
   const filteredID = oldState[lastIdx].id;
-  const firstGifID = data[0].id;
+  const firstGifID = preppredGifData[0].id;
 
   // Sanitize old oldState to avoid getting dupe gif data objects
   const sanitized = filteredID === firstGifID ? oldState.pop() : oldState;
 
-  const newGifData = [].concat(sanitized, data);
+  const newGifData = [].concat(sanitized, preppredGifData);
 
-  console.log('newGifData inside processGiphyResponse ', newGifData);
+  console.log("newGifData inside processGiphyResponse ", newGifData);
 
   const newState = {
     gifData: newGifData,
@@ -88,23 +109,21 @@ export const updateGifFeed = async (
   try {
     const giphyResponse = await fetch(URL).then(response => response.json());
 
-    console.log("giphyResponse inside updateGifFeed ", giphyResponse);
-    console.log('gifData inside updateGifFeed ', gifData)
-    console.log("\n");
-
     const { data, pagination } = giphyResponse;
     const { total_count: totalCount, offset } = pagination;
 
+    const preppredGifData = prepGiphyStateForRedux(data);
+
     const lastIdx = gifData.length - 1;
     const filteredID = gifData[lastIdx].id;
-    const firstGifID = data[0].id;
+    const firstGifID = preppredGifData[0].id;
 
     // Sanitize old gifData to avoid getting dupe gif data objects
     const sanitized = filteredID === firstGifID ? gifData.pop() : gifData;
 
-    const newGifData = [].concat(sanitized, data);
+    const newGifData = [].concat(sanitized, preppredGifData);
 
-    console.log('newGifData inside updateGifFeed ', newGifData)
+    console.log("newGifData inside updateGifFeed ", newGifData);
 
     const newState = {
       gifData: newGifData,
@@ -114,9 +133,8 @@ export const updateGifFeed = async (
     };
 
     return newState;
-    
   } catch (error) {
-    console.log('error fetching the gifs ', error)
+    console.log("error fetching the gifs ", error);
     return { isError: true, status: "There was a problem fetching the Gifs." };
   }
 };

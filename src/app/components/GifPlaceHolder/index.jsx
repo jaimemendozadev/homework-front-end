@@ -24,12 +24,13 @@ class GifPlaceHolder extends Component {
     const controller = new AbortController();
     const mySignal = controller.signal;
 
-    
     // Get gif Image URL based on layout
     const imgReqURL = setLayoutGifSize(gif, layout);
 
     // Fetch the Image
-    const imageBlob = await fetch(imgReqURL, {mySignal}).then(response => response.blob());
+    const imageBlob = await fetch(imgReqURL, { mySignal }).then(response =>
+      response.blob()
+    );
 
     const imgURL = URL.createObjectURL(imageBlob);
 
@@ -41,13 +42,12 @@ class GifPlaceHolder extends Component {
   };
 
   componentWillUnmount = () => {
-    const {controller, imgURL} = this.state;
+    const { controller, imgURL } = this.state;
     controller.abort();
     console.log("Aborting image request...");
 
     window.URL.revokeObjectURL(imgURL);
-
-  }
+  };
 
   render() {
     const { gif, layout } = this.props;
