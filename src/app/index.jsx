@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import styles from "./sass/_styles.scss";
 import GifView from "./components/GifView/index.jsx";
 import Search from "./components/Search/index.jsx";
+import Sorter from "./components/Sorter/index.jsx";
 import { appLoaded, loadMoreData } from "../services/redux/actions/index.js";
 import {
   UPDATE_TRENDING_RESULTS,
@@ -38,7 +39,6 @@ class App extends Component {
       trendingResults,
       searchResults,
       inTrendingMode,
-      inSearchMode,
       LoadMoreData
     } = this.props;
     const toUpdate = inTrendingMode === true ? trendingResults : searchResults;
@@ -50,6 +50,7 @@ class App extends Component {
       if (inTrendingMode === true) {
         const { offset, gifData, gifIDSet } = trendingResults;
         const newOffSet = offset + 25;
+
         const action = {
           scroll: TRENDING_SCROLLING_TRUE,
           type: UPDATE_TRENDING_RESULTS
@@ -58,8 +59,6 @@ class App extends Component {
         // Fire action that updates scrolling and fetches more data
         LoadMoreData(null, newOffSet, gifData, gifIDSet, action);
       } else {
-        // searchValue = null, urlOffset = 0, gifData
-
         const { offset, gifData, gifIDSet, searchValue } = searchResults;
         const newOffSet = offset + 25;
 
@@ -117,6 +116,7 @@ class App extends Component {
         </div>
 
         <Search />
+        <Sorter />
 
         {this.handleGifView()}
       </div>
