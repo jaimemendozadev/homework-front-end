@@ -9,7 +9,8 @@ const defaultTrendingResultsState = {
   gifData: [],
   offset: 0,
   totalCount: null,
-  scrolling: false
+  scrolling: false,
+  gifIDSet: {}
 };
 
 const trendingResults = (state = defaultTrendingResultsState, action) => {
