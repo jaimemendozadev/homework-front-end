@@ -8,10 +8,10 @@
   button {
     height: 50px;
     border: 1px solid $button-color;
+    margin-right: .5em;
     color: $button-color;
     background-color: white;
-    // padding: 1em;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 1em;
   }
 }
