@@ -19,17 +19,29 @@ export const switchToSearchMode = payload => ({
 });
 
 export const loadMoreTrendingData = oldState => {
-  const { offset, gifData } = oldState;
+  const { offset, gifData, gifIDSet } = oldState;
   const newOffSet = offset + 25;
 
   return async dispatch => {
     dispatch({ type: SCROLLING_TRUE, payload: { scrolling: true } });
     const giphyResult = await updateGifFeed(null, newOffSet, gifData);
 
-    console.log(
-      "final giphyResult pass to Redux in loadMoreTrendingData ",
-      giphyResult
-    );
+    // Use gifIDSet to sanitize gifData & avoid getting dupe gif data objects
+    const filteredGifs = giphyResult.gifData.map(gif => {
+      const { id } = gif;
+
+      if (!gifIDSet[id]) {
+        gifIDSet[id] = true;
+
+        return gif;
+      }
+    });
+
+    // Merge old gifData and filteredGifs
+    giphyResult.gifData = [...gifData, ...filteredGifs];
+
+    // Add updated gifIDSet to Redux
+    giphyResult.gifIDSet = gifIDSet;
 
     dispatch({
       type: UPDATE_TRENDING_RESULTS,

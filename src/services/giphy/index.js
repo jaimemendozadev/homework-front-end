@@ -117,19 +117,8 @@ export const updateGifFeed = async (
 
     const preppredGifData = prepGiphyStateForRedux(data);
 
-    const lastIdx = gifData.length - 1;
-    const filteredID = gifData[lastIdx].id;
-    const firstGifID = preppredGifData[0].id;
-
-    // Sanitize old gifData to avoid getting dupe gif data objects
-    const sanitized = filteredID === firstGifID ? gifData.pop() : gifData;
-
-    const newGifData = [].concat(sanitized, preppredGifData);
-
-    console.log("newGifData inside updateGifFeed ", newGifData);
-
     const newState = {
-      gifData: newGifData,
+      gifData: preppredGifData,
       totalCount,
       offset,
       scrolling: false
