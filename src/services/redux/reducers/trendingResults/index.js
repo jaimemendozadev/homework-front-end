@@ -2,7 +2,8 @@ import {
   INIT_APP,
   UPDATE_TRENDING_RESULTS,
   SCROLLING_TRUE,
-  SWITCH_TO_SEARCH_MODE
+  SWITCH_TO_SEARCH_MODE,
+  SWITCH_TO_TRENDING_MODE
 } from "../../actions/types.js";
 
 const defaultTrendingResultsState = {
@@ -10,7 +11,6 @@ const defaultTrendingResultsState = {
   offset: 0,
   totalCount: null,
   scrolling: false,
-  import_datetime: "",
   gifIDSet: {}
 };
 
@@ -26,7 +26,7 @@ const trendingResults = (state = defaultTrendingResultsState, action) => {
       return action.payload;
 
     case SWITCH_TO_SEARCH_MODE:
-      return Object.assign({}, state, action.payload.appStatus);
+      return defaultTrendingResultsState;
 
     default:
       return state;

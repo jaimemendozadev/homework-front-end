@@ -1,7 +1,8 @@
 import {
   GET_SEARCH_RESULTS,
   SCROLLING_TRUE,
-  SWITCH_TO_SEARCH_MODE
+  SWITCH_TO_SEARCH_MODE,
+  SWITCH_TO_TRENDING_MODE
 } from "../../actions/types.js";
 
 const defaultSearchResultsState = {
@@ -9,7 +10,6 @@ const defaultSearchResultsState = {
   offset: 0,
   totalCount: null,
   scrolling: false,
-  import_datetime: "",
   gifIDSet: {}
 };
 
@@ -20,6 +20,9 @@ const searchResults = (state = defaultSearchResultsState, action) => {
 
     case SWITCH_TO_SEARCH_MODE:
       return action.payload.giphyResults;
+
+    case SWITCH_TO_TRENDING_MODE:
+      return defaultSearchResultsState;
 
     case SCROLLING_TRUE:
       return Object.assign({}, state, action.payload);

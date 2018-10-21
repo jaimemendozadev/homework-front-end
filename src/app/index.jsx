@@ -59,7 +59,7 @@ class App extends Component {
     // Add event listener when user scrolls to bottom of page
     window.addEventListener("scroll", this.invokeHandleScroll);
 
-    // On CDM, if app hasn't started, make initialGiphyReq
+    // On CDM, if app hasn't started, make initRequest for data
     if (appStarted === false) {
       const initialState = {};
       const gifIDSet = {};
@@ -69,10 +69,10 @@ class App extends Component {
       // create gifIDSet for Redux store to track gifs already seen
       giphyResults.gifData.forEach(({ id }) => (gifIDSet[id] = true));
 
-      // Tell Redux store app is currently inTrending Mode
       initialState.giphyResults = giphyResults;
       initialState.giphyResults.gifIDSet = gifIDSet;
 
+      // Tell Redux store app is currently inTrending Mode
       initialState.appStatus = {
         appStarted: true,
         inTrendingMode: true,
@@ -116,7 +116,6 @@ App.propTypes = {
     offset: PropTypes.number,
     totalCount: PropTypes.number,
     scrolling: PropTypes.bool,
-    import_datetime: PropTypes.string,
     gifIDSet: PropTypes.object
   }).isRequired,
 
@@ -125,7 +124,6 @@ App.propTypes = {
     offset: PropTypes.number,
     totalCount: PropTypes.number,
     scrolling: PropTypes.bool,
-    import_datetime: PropTypes.string,
     gifIDSet: PropTypes.object
   }).isRequired,
 

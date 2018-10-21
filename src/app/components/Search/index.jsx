@@ -49,6 +49,7 @@ class Search extends Component {
   handleSubmit = async event => {
     const { SwitchToSearchMode } = this.props;
     const searchState = {};
+    const gifIDSet = {};
 
     event.preventDefault();
     const { searchValue } = this.state;
@@ -57,8 +58,13 @@ class Search extends Component {
 
     console.log("giphyResults for form ", giphyResults);
 
-    // Tell Redux app is now inSearchMode and pass searchState to store
+    // create gifIDSet for Redux store to track gifs already seen
+    giphyResults.gifData.forEach(({ id }) => (gifIDSet[id] = true));
+
     searchState.giphyResults = giphyResults;
+    searchState.giphyResults.gifIDSet = gifIDSet;
+
+    // Tell Redux app is now inSearchMode and pass searchState to store
     searchState.appStatus = { inSearchMode: true, inTrendingMode: false };
 
     this.setState(defaultState, () => SwitchToSearchMode(searchState));

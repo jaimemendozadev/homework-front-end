@@ -3,7 +3,8 @@ import {
   GET_SEARCH_RESULTS,
   UPDATE_TRENDING_RESULTS,
   SCROLLING_TRUE,
-  SWITCH_TO_SEARCH_MODE
+  SWITCH_TO_SEARCH_MODE,
+  SWITCH_TO_TRENDING_MODE
 } from "./types.js";
 
 import { updateGifFeed } from "../../giphy/index.js";

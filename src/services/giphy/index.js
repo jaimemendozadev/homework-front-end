@@ -5,26 +5,6 @@ const API_KEY = process.env.API_KEY;
 const REQ_URL = `${BASE_GIPHY_URL}/trending?api_key=${API_KEY}&offset=`;
 const SEARCH_URL = `${BASE_GIPHY_URL}/search?api_key=${API_KEY}&offset=`;
 
-export const prepStateForRedux = giphyResponse => {
-  const preppedGiphyState = giphyResponse.map(gif => {
-    const gifObject = {};
-
-    gifObject.id = gif.id;
-    gifObject.url = gif.url;
-    gifObject.title = gif.title;
-    gifObject.username = gif.username;
-    gifObject.images = {
-      fixed_height: gif.images.fixed_height.url,
-      fixed_width: gif.images.fixed_width.url,
-      original: gif.images.original.url
-    };
-
-    return gifObject;
-  });
-
-  return preppedGiphyState;
-};
-
 export const handleScroll = ({ scrolling, totalCount, offset }) => {
   if (scrolling) return; // See note below
   if (offset >= totalCount) return;
@@ -37,6 +17,27 @@ export const handleScroll = ({ scrolling, totalCount, offset }) => {
   const bottomOffset = 20;
 
   return pageOffset > lastImgOffset - bottomOffset;
+};
+
+export const prepStateForRedux = giphyResponse => {
+  const preppedGiphyState = giphyResponse.map(gif => {
+    const gifObject = {};
+
+    gifObject.id = gif.id;
+    gifObject.url = gif.url;
+    gifObject.title = gif.title;
+    gifObject.import_datetime = gif.import_datetime;
+    gifObject.username = gif.username;
+    gifObject.images = {
+      fixed_height: gif.images.fixed_height.url,
+      fixed_width: gif.images.fixed_width.url,
+      original: gif.images.original.url
+    };
+
+    return gifObject;
+  });
+
+  return preppedGiphyState;
 };
 
 const processResponse = (giphyResponse, oldState = null) => {
@@ -56,25 +57,25 @@ const processResponse = (giphyResponse, oldState = null) => {
     return newState;
   }
 
-  const lastIdx = oldState.length - 1;
-  const filteredID = oldState[lastIdx].id;
-  const firstGifID = preppredGifData[0].id;
+  // const lastIdx = oldState.length - 1;
+  // const filteredID = oldState[lastIdx].id;
+  // const firstGifID = preppredGifData[0].id;
 
-  // Sanitize old oldState to avoid getting dupe gif data objects
-  const sanitized = filteredID === firstGifID ? oldState.pop() : oldState;
+  // // Sanitize old oldState to avoid getting dupe gif data objects
+  // const sanitized = filteredID === firstGifID ? oldState.pop() : oldState;
 
-  const newGifData = [].concat(sanitized, preppredGifData);
+  // const newGifData = [].concat(sanitized, preppredGifData);
 
-  console.log("newGifData inside processResponse ", newGifData);
+  // console.log("newGifData inside processResponse ", newGifData);
 
-  const newState = {
-    gifData: newGifData,
-    totalCount,
-    offset,
-    scrolling: false
-  };
+  // const newState = {
+  //   gifData: newGifData,
+  //   totalCount,
+  //   offset,
+  //   scrolling: false
+  // };
 
-  return newState;
+  // return newState;
 };
 
 // makeInitRequest makes first request for trendingResults & searchResults
