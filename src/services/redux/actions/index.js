@@ -32,6 +32,7 @@ export const loadMoreData = (
   direction
 ) => async dispatch => {
   dispatch({ type: actionTypes.scroll, payload: { scrolling: true } });
+
   const giphyResult = await updateGifFeed(searchValue, newOffSet, gifData);
 
   // Use gifIDSet to sanitize gifData & avoid getting dupe gif data objects

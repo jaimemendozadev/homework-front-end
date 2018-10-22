@@ -7,13 +7,12 @@ import GifView from "./components/GifView/index.jsx";
 import Search from "./components/Search/index.jsx";
 import Sorter from "./components/Sorter/index.jsx";
 import { appLoaded, loadMoreData } from "../services/redux/actions/index.js";
-import {
-  UPDATE_TRENDING_RESULTS,
-  UPDATE_SEARCH_RESULTS,
-  SEARCH_SCROLLING_TRUE,
-  TRENDING_SCROLLING_TRUE
-} from "../services/redux/actions/types.js";
 import { handleScroll, makeInitRequest } from "../services/giphy/index.js";
+import {
+  setSortDirection,
+  setLoadMoreDataArgs,
+  createInitAppData
+} from "./utils.js";
 
 class App extends Component {
   handleGifView = () => {
@@ -46,52 +45,20 @@ class App extends Component {
 
     const toUpdate = inTrendingMode === true ? trendingResults : searchResults;
 
-    // determine if gifData needs to be sorted
-    let sortDirection;
-
-    if (ascendingSort || descendingSort) {
-      if (ascendingSort === true && descendingSort === false) {
-        sortDirection = "Asc";
-      } else if (ascendingSort === false && descendingSort === true) {
-        sortDirection = "Dsc";
-      } else {
-        sortDirection = null;
-      }
-    }
-
     // Check to see if user is at bottom of the browswer
     const loadMore = handleScroll(toUpdate);
 
+    // determine if gifData needs to be sorted
+    const sortDirection = setSortDirection(ascendingSort, descendingSort);
+
     if (loadMore === true) {
-      if (inTrendingMode === true) {
-        const { offset, gifData, gifIDSet } = trendingResults;
-        const newOffSet = offset + 25;
+      const loadMoreArgs =
+        inTrendingMode === true
+          ? setLoadMoreDataArgs(trendingResults, null, sortDirection)
+          : setLoadMoreDataArgs(null, searchResults, sortDirection);
 
-        const action = {
-          scroll: TRENDING_SCROLLING_TRUE,
-          type: UPDATE_TRENDING_RESULTS
-        };
-
-        // Fire action that updates scrolling and fetches more data
-        LoadMoreData(null, newOffSet, gifData, gifIDSet, action, sortDirection);
-      } else {
-        const { offset, gifData, gifIDSet, searchValue } = searchResults;
-        const newOffSet = offset + 25;
-
-        const action = {
-          scroll: SEARCH_SCROLLING_TRUE,
-          type: UPDATE_SEARCH_RESULTS
-        };
-
-        LoadMoreData(
-          searchValue,
-          newOffSet,
-          gifData,
-          gifIDSet,
-          action,
-          sortDirection
-        );
-      }
+      // Call Redux action
+      LoadMoreData(...loadMoreArgs);
     }
   };
 
@@ -103,23 +70,9 @@ class App extends Component {
 
     // On CDM, if app hasn't started, make initRequest for data
     if (appStarted === false) {
-      const initialState = {};
-      const gifIDSet = {};
-
       const giphyResults = await makeInitRequest(null, 0);
 
-      // create gifIDSet for Redux store to track gifs already seen
-      giphyResults.gifData.forEach(({ id }) => (gifIDSet[id] = true));
-
-      initialState.giphyResults = giphyResults;
-      initialState.giphyResults.gifIDSet = gifIDSet;
-
-      // Tell Redux store app is currently inTrending Mode
-      initialState.appStatus = {
-        appStarted: true,
-        inTrendingMode: true,
-        inSearchMode: false
-      };
+      const initialState = createInitAppData(giphyResults);
 
       AppLoaded(initialState);
     }
