@@ -48,19 +48,28 @@ export const setCurrentLayout = width => {
 
 const stitch = (firstArray, secondArray, direction) => {
   const results = [];
-  // import_datetime
+  
   while (firstArray.length && secondArray.length) {
-    const firstDate = new Date(firstArray[0].import_datetime);
-    const secondDate = new Date(secondArray[0].import_datetime);
+    let firstDate = firstArray[0].import_datetime;
+    let secondDate = secondArray[0].import_datetime;
 
-    if (direction === "Asc") {
-      firstDate < secondDate
-        ? results.push(firstArray.shift())
-        : results.push(secondArray.shift());
+    if (firstDate && !secondDate) {
+      results.push(firstArray.shift());
+    } else if (!firstDate && secondDate) {
+      results.push(secondArray.shift());
     } else {
-      firstDate > secondDate
-        ? results.push(firstArray.shift())
-        : results.push(secondArray.shift());
+      firstDate = new Date(firstArray[0].import_datetime);
+      secondDate = new Date(secondArray[0].import_datetime);
+
+      if (direction === "Asc") {
+        firstDate < secondDate
+          ? results.push(firstArray.shift())
+          : results.push(secondArray.shift());
+      } else {
+        firstDate > secondDate
+          ? results.push(firstArray.shift())
+          : results.push(secondArray.shift());
+      }
     }
   }
 
