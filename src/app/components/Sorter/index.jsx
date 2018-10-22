@@ -18,24 +18,16 @@ const handleSort = (
   const { appStarted, inTrendingMode } = appStatus;
 
   if (appStarted === true) {
-    if (inTrendingMode === true) {
-      const { gifData } = trendingResults;
-      const mergeResults = mergeSort(gifData, direction);
+    const dataToSort =
+      inTrendingMode === true ? trendingResults.gifData : searchResults.gifData;
 
-      const payload = { gifData: mergeResults };
-      const actionType = { type: SORT_TRENDING };
+    const mergeResults = mergeSort(dataToSort, direction);
+    const payload = { gifData: mergeResults };
 
-      InitiateSorting(actionType, payload);
+    const actionType =
+      inTrendingMode === true ? { type: SORT_TRENDING } : { type: SORT_SEARCH };
 
-    } else {
-      const { gifData } = searchResults;
-      const mergeResults = mergeSort(gifData, direction);
-
-      const payload = { gifData: mergeResults };
-      const actionType = { type: SORT_SEARCH };
-
-      InitiateSorting(actionType, payload);
-    }
+    InitiateSorting(actionType, payload);
   }
 };
 
