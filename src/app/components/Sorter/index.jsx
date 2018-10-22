@@ -1,32 +1,43 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { mergeSort } from "./mergeSort.js";
 
-const handleAscendingSort = (appStatus, searchResults, trendingResults) => {
+const handleSort = (appStatus, searchResults, trendingResults, direction) => {
   const { appStarted, inTrendingMode } = appStatus;
 
   if (appStarted === true) {
     if (inTrendingMode === true) {
-        
-    } else {
+      const { gifData } = trendingResults;
+      const mergeResults = mergeSort(gifData, direction);
 
+      console.log(
+        `mergeResults for trendingMode in ${direction} `,
+        mergeResults
+      );
+    } else {
+      const { gifData } = searchResults;
+      const mergeResults = mergeSort(gifData, direction);
+
+      console.log(
+        `mergeResults for searchMode in ${direction} direction `,
+        mergeResults
+      );
     }
   }
 };
-
-const handleDescendingSort = (appStatus, searchResults, trendingResults) => {};
 
 const Sorter = ({ appStatus, searchResults, trendingResults }) => (
   <div className="sorter-container">
     <button
       onClick={() =>
-        handleAscendingSort(appStatus, searchResults, trendingResults)
+        handleSort(appStatus, searchResults, trendingResults, "Asc")
       }
     >
       Asc. Results
     </button>
     <button
       onClick={() =>
-        handleDescendingSort(appStatus, searchResults, trendingResults)
+        handleSort(appStatus, searchResults, trendingResults, "Dsc")
       }
     >
       Desc. Results

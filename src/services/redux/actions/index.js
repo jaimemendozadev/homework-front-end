@@ -67,3 +67,5 @@ export const updateTrendingResults = payload => ({
   type: UPDATE_TRENDING_RESULTS,
   payload
 });
+
+export const initAscendingSort = gifData => {};
