@@ -53,10 +53,6 @@ const stitch = (firstArray, secondArray, direction) => {
   console.log("firstArray is ", firstArray);
   console.log("secondArray is ", secondArray);
 
-  if (!firstArray.length || !secondArray.length) {
-    return [...firstArray, ...secondArray];
-  }
-
   while (firstArray.length && secondArray.length) {
     const firstDate = new Date(firstArray[0].import_datetime);
     const secondDate = new Date(secondArray[0].import_datetime);
@@ -76,8 +72,8 @@ const stitch = (firstArray, secondArray, direction) => {
 };
 
 export const mergeSort = (dataArray, direction) => {
-  if (dataArray.length <= 1) {
-    return dataArray;
+  if (dataArray.length === 1) {
+    return dataArray[0] === undefined ? [] : dataArray;
   }
 
   const mid = Math.floor(dataArray.length / 2);
