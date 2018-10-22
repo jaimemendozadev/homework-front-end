@@ -59,7 +59,9 @@ class Search extends Component {
     console.log("giphyResults for form ", giphyResults);
 
     // create gifIDSet for Redux store to track gifs already seen
-    giphyResults.gifData.forEach(({ id }) => (gifIDSet[id] = true));
+    giphyResults.gifData.forEach(({ id }) => {
+      gifIDSet[id] = true;
+    });
 
     searchState.giphyResults = giphyResults;
     searchState.giphyResults.gifIDSet = gifIDSet;

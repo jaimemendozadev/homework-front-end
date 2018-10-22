@@ -40,22 +40,20 @@ export const prepStateForRedux = giphyResponse => {
   return preppedGiphyState;
 };
 
-const processResponse = (giphyResponse, oldState = null) => {
+const processResponse = giphyResponse => {
   const { data, pagination } = giphyResponse;
   const { total_count: totalCount, offset } = pagination;
 
   const preppredGifData = prepStateForRedux(data);
 
-  if (oldState === null) {
-    const newState = {
-      gifData: preppredGifData,
-      totalCount,
-      offset,
-      scrolling: false
-    };
+  const newState = {
+    gifData: preppredGifData,
+    totalCount,
+    offset,
+    scrolling: false
+  };
 
-    return newState;
-  }
+  return newState;
 };
 
 // makeInitRequest makes first request for trendingResults & searchResults
@@ -76,11 +74,7 @@ export const makeInitRequest = async (searchValue = null, offset = 0) => {
   }
 };
 
-export const updateGifFeed = async (
-  searchValue = null,
-  urlOffset = 0,
-  gifData
-) => {
+export const updateGifFeed = async (searchValue = null, urlOffset = 0) => {
   const URL =
     searchValue === null
       ? `${REQ_URL}${urlOffset}`

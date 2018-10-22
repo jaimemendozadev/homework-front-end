@@ -31,7 +31,6 @@ class GifCard extends Component {
     // Change imgURL and styling for fetched Gif
     fetchedGif.onload = () => {
       this.setState({
-        imgURL: fetchedGif.src,
         imgClassName: "fetched-gif"
       });
     };
@@ -44,7 +43,7 @@ class GifCard extends Component {
       }
     } = this.props;
     const { title, username, images, url } = gif;
-    const { imgClassName, imgURL } = this.state;
+    const { imgClassName } = this.state;
 
     console.log("gif inside GifCard ", gif);
 
@@ -53,7 +52,7 @@ class GifCard extends Component {
         <div className="gifcard-container">
           <div className="gifstagram-icon-container">
             <div className="logo-container">
-              <img src={`/${Logo}`} />
+              <img alt="dancing penguin Slack icon" src={`/${Logo}`} />
             </div>
 
             <h2>Gifstagram</h2>
@@ -63,6 +62,7 @@ class GifCard extends Component {
             <img
               className={`gifcard-image ${imgClassName}`}
               src={images.original}
+              alt={`${title} gif from Giphy`}
             />
           </div>
           {/* end gifcard-gif-container  */}
@@ -81,8 +81,7 @@ class GifCard extends Component {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                @
-{username}
+                @{username}
               </a>
             </h4>
           </div>

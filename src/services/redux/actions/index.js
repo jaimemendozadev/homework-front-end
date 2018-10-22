@@ -31,18 +31,22 @@ export const loadMoreData = (
   actionTypes,
   direction
 ) => async dispatch => {
+  const currentIDSet = gifIDSet;
+
   dispatch({ type: actionTypes.scroll, payload: { scrolling: true } });
 
-  const giphyResult = await updateGifFeed(searchValue, newOffSet, gifData);
+  const giphyResult = await updateGifFeed(searchValue, newOffSet);
 
   // Use gifIDSet to sanitize gifData & avoid getting dupe gif data objects
-  const filteredGifs = giphyResult.gifData.map(gif => {
+  const filteredGifs = [];
+
+  giphyResult.gifData.forEach(gif => {
     const { id } = gif;
 
-    if (!gifIDSet[id]) {
-      gifIDSet[id] = true;
+    if (!currentIDSet[id]) {
+      currentIDSet[id] = true;
 
-      return gif;
+      filteredGifs.push(gif);
     }
   });
 
@@ -54,7 +58,7 @@ export const loadMoreData = (
       : [...gifData, ...filteredGifs];
 
   // Add updated gifIDSet to Redux
-  giphyResult.gifIDSet = gifIDSet;
+  giphyResult.gifIDSet = currentIDSet;
 
   // Reattach searchValue
   if (searchValue !== null) {

@@ -19,23 +19,17 @@ class GifPlaceHolder extends Component {
   componentDidMount = async () => {
     const { gif, layout } = this.props;
 
-    const controller = new AbortController();
-    const mySignal = controller.signal;
-
     // Get gif Image URL based on layout
     const imgReqURL = setLayoutGifSize(gif, layout);
 
     // Fetch the Image
-    const imageBlob = await fetch(imgReqURL, { mySignal }).then(response =>
-      response.blob()
-    );
+    const imageBlob = await fetch(imgReqURL).then(response => response.blob());
 
     const imgURL = URL.createObjectURL(imageBlob);
 
     this.setState({
       imgURL,
-      imgClassName: "fetched-gif",
-      controller
+      imgClassName: "fetched-gif"
     });
   };
 

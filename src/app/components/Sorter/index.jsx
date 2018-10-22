@@ -54,6 +54,7 @@ const Sorter = ({
 }) => (
   <div className="sorter-container">
     <button
+      type="button"
       onClick={() =>
         handleSort(
           appStatus,
@@ -67,6 +68,7 @@ const Sorter = ({
       Asc. Results
     </button>
     <button
+      type="button"
       onClick={() =>
         handleSort(
           appStatus,
@@ -79,7 +81,7 @@ const Sorter = ({
     >
       Desc. Results
     </button>
-    <button>Reset Sorting</button>
+    <button type="button">Reset Sorting</button>
   </div>
 );
 
