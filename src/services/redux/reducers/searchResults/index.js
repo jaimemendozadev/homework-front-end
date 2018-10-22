@@ -34,7 +34,7 @@ const searchResults = (state = defaultSearchResultsState, action) => {
       return defaultSearchResultsState;
 
     case SORT_SEARCH:
-      return Object.assign({}, state, action.payload);
+      return Object.assign({}, state, action.payload.gifData);
 
     default:
       return state;

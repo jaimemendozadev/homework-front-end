@@ -29,7 +29,7 @@ const trendingResults = (state = defaultTrendingResultsState, action) => {
       return defaultTrendingResultsState;
 
     case SORT_TRENDING:
-      return Object.assign({}, state, action.payload);
+      return Object.assign({}, state, action.payload.gifData);
 
     default:
       return state;

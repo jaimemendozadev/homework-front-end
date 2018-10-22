@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { mergeSort } from "./mergeSort.js";
+import { mergeSort } from "../utils.js";
 import {
   SORT_TRENDING,
   SORT_SEARCH
@@ -22,7 +22,22 @@ const handleSort = (
       inTrendingMode === true ? trendingResults.gifData : searchResults.gifData;
 
     const mergeResults = mergeSort(dataToSort, direction);
-    const payload = { gifData: mergeResults };
+    const payload = {};
+
+    payload.gifData = { gifData: mergeResults };
+
+    // update the appStatus in Redux with current sort direction
+    const updatedAppStatus = {};
+
+    if (direction === "Asc") {
+      updatedAppStatus.ascendingSort = true;
+      updatedAppStatus.descendingSort = false;
+    } else {
+      updatedAppStatus.ascendingSort = false;
+      updatedAppStatus.descendingSort = true;
+    }
+
+    payload.appStatus = updatedAppStatus;
 
     const actionType =
       inTrendingMode === true ? { type: SORT_TRENDING } : { type: SORT_SEARCH };
