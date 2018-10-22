@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Placeholder from "../../assets/dancing-slack-penguin.gif";
 import { setLayoutGifSize, renderDate } from "./utils.js";
@@ -21,6 +22,19 @@ class GifPlaceHolder extends Component {
     super(props);
     this.state = defaultState;
   }
+
+  handleDateDisplay = () => {
+    const { gif, ascendingSort, descendingSort } = this.props;
+    const { imgClassName } = this.state;
+
+    if (ascendingSort || descendingSort) {
+      if (imgClassName === "fetched-gif") {
+        return <DateDisplay timestamp={gif.import_datetime} />;
+      }
+    }
+
+    return null;
+  };
 
   componentDidMount = async () => {
     const { gif, layout } = this.props;
@@ -55,13 +69,19 @@ class GifPlaceHolder extends Component {
             src={imgURL}
           />
         </Link>
-        <DateDisplay timestamp={gif.import_datetime} />
+        {this.handleDateDisplay()}
       </div>
     );
   }
 }
 
+DateDisplay.propTypes = {
+  timestamp: PropTypes.string.isRequired
+};
+
 GifPlaceHolder.propTypes = {
+  ascendingSort: PropTypes.bool.isRequired,
+  descendingSort: PropTypes.bool.isRequired,
   gif: PropTypes.shape({
     bitly_gif_url: PropTypes.string,
     bitly_url: PropTypes.string,
@@ -86,4 +106,9 @@ GifPlaceHolder.propTypes = {
   layout: PropTypes.string.isRequired
 };
 
-export default GifPlaceHolder;
+const mapStateToProps = ({ appStatus }) => ({
+  ascendingSort: appStatus.ascendingSort,
+  descendingSort: appStatus.descendingSort
+});
+
+export default connect(mapStateToProps)(GifPlaceHolder);

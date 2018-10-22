@@ -3,7 +3,7 @@ import { setLayoutGifSize } from "../utils";
 const renderDate = timeStamp => {
   const newDate = new Date(timeStamp);
 
-  const day = newDate.getDay();
+  const day = newDate.getDate();
 
   const month = newDate.getMonth();
 

@@ -7,6 +7,7 @@
   .gifplaceholder-container {
     width: 30%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;   
 
     img.fetched-gif {
@@ -26,6 +27,7 @@
   .gifplaceholder-container {
     width: 30%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
   }
 
@@ -49,6 +51,7 @@
     margin-right: 1em;
     margin-bottom: 1em;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
   }
 
