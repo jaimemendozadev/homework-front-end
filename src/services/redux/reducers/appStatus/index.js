@@ -3,7 +3,9 @@ import { INIT_APP, SWITCH_TO_SEARCH_MODE } from "../../actions/types.js";
 const defaultAppStatusState = {
   appStarted: false,
   inTrendingMode: false,
-  inSearchMode: false
+  inSearchMode: false,
+  ascendingSort: false,
+  descendingSort: false
 };
 
 const appStatus = (state = defaultAppStatusState, action) => {

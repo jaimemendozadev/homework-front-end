@@ -108,6 +108,15 @@ class App extends Component {
 
   render() {
     console.log("this.props inside App ", this.props);
+    const {
+      trendingResults,
+      searchResults,
+      appStarted,
+      inTrendingMode,
+      inSearchMode,
+      ascendingSort,
+      descendingSort
+    } = this.props;
 
     return (
       <div className="app-container">
@@ -116,7 +125,11 @@ class App extends Component {
         </div>
 
         <Search />
-        <Sorter />
+        <Sorter
+          appStatus={{ appStarted, inTrendingMode, inSearchMode }}
+          searchResults={searchResults}
+          trendingResults={trendingResults}
+        />
 
         {this.handleGifView()}
       </div>
@@ -128,6 +141,8 @@ App.propTypes = {
   appStarted: PropTypes.bool.isRequired,
   inSearchMode: PropTypes.bool.isRequired,
   inTrendingMode: PropTypes.bool.isRequired,
+  ascendingSort: PropTypes.bool.isRequired,
+  descendingSort: PropTypes.bool.isRequired,
   AppLoaded: PropTypes.func.isRequired,
   LoadMoreData: PropTypes.func.isRequired,
 
@@ -160,6 +175,8 @@ const mapStateToProps = ({ appStatus, trendingResults, searchResults }) => ({
   appStarted: appStatus.appStarted,
   inSearchMode: appStatus.inSearchMode,
   inTrendingMode: appStatus.inTrendingMode,
+  descendingSort: appStatus.descendingSort,
+  ascendingSort: appStatus.ascendingSort,
   trendingResults,
   searchResults
 });
