@@ -1,8 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { mergeSort } from "./mergeSort.js";
+import {
+  SORT_TRENDING,
+  SORT_SEARCH
+} from "../../../services/redux/actions/types.js";
+import { initiateSorting } from "../../../services/redux/actions/index.js";
 
-const handleSort = (appStatus, searchResults, trendingResults, direction) => {
+const handleSort = (
+  appStatus,
+  searchResults,
+  trendingResults,
+  direction,
+  InitiateSorting
+) => {
   const { appStarted, inTrendingMode } = appStatus;
 
   if (appStarted === true) {
@@ -10,34 +22,52 @@ const handleSort = (appStatus, searchResults, trendingResults, direction) => {
       const { gifData } = trendingResults;
       const mergeResults = mergeSort(gifData, direction);
 
-      console.log(
-        `mergeResults for trendingMode in ${direction} `,
-        mergeResults
-      );
+      const payload = { gifData: mergeResults };
+      const actionType = { type: SORT_TRENDING };
+
+      InitiateSorting(actionType, payload);
+
     } else {
       const { gifData } = searchResults;
       const mergeResults = mergeSort(gifData, direction);
 
-      console.log(
-        `mergeResults for searchMode in ${direction} direction `,
-        mergeResults
-      );
+      const payload = { gifData: mergeResults };
+      const actionType = { type: SORT_SEARCH };
+
+      InitiateSorting(actionType, payload);
     }
   }
 };
 
-const Sorter = ({ appStatus, searchResults, trendingResults }) => (
+const Sorter = ({
+  appStatus,
+  searchResults,
+  trendingResults,
+  InitiateSorting
+}) => (
   <div className="sorter-container">
     <button
       onClick={() =>
-        handleSort(appStatus, searchResults, trendingResults, "Asc")
+        handleSort(
+          appStatus,
+          searchResults,
+          trendingResults,
+          "Asc",
+          InitiateSorting
+        )
       }
     >
       Asc. Results
     </button>
     <button
       onClick={() =>
-        handleSort(appStatus, searchResults, trendingResults, "Dsc")
+        handleSort(
+          appStatus,
+          searchResults,
+          trendingResults,
+          "Dsc",
+          InitiateSorting
+        )
       }
     >
       Desc. Results
@@ -47,6 +77,7 @@ const Sorter = ({ appStatus, searchResults, trendingResults }) => (
 );
 
 Sorter.propTypes = {
+  InitiateSorting: PropTypes.func.isRequired,
   appStatus: PropTypes.shape({
     appStarted: PropTypes.bool,
     inTrendingMode: PropTypes.bool,
@@ -71,4 +102,7 @@ Sorter.propTypes = {
   }).isRequired
 };
 
-export default Sorter;
+export default connect(
+  null,
+  { InitiateSorting: initiateSorting }
+)(Sorter);

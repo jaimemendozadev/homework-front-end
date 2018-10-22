@@ -1,4 +1,8 @@
-import { INIT_APP, SWITCH_TO_SEARCH_MODE } from "../../actions/types.js";
+import {
+  INIT_APP,
+  SWITCH_TO_SEARCH_MODE,
+  SWITCH_TO_TRENDING_MODE
+} from "../../actions/types.js";
 
 const defaultAppStatusState = {
   appStarted: false,
@@ -14,6 +18,10 @@ const appStatus = (state = defaultAppStatusState, action) => {
       return Object.assign({}, state, action.payload.appStatus);
 
     case SWITCH_TO_SEARCH_MODE:
+      return Object.assign({}, state, action.payload.appStatus);
+
+    // appStatus = { inSearchMode: false, inTrendingMode: true };
+    case SWITCH_TO_TRENDING_MODE:
       return Object.assign({}, state, action.payload.appStatus);
 
     default:

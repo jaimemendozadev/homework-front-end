@@ -86,9 +86,6 @@ export const updateGifFeed = async (
       ? `${REQ_URL}${urlOffset}`
       : `${SEARCH_URL}${urlOffset}&q=${searchValue}`;
 
-  console.log("searchValue is ", searchValue);
-  console.log("URL using is ", URL);
-
   try {
     const giphyResponse = await fetch(URL).then(response => response.json());
 

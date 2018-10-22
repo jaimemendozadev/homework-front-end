@@ -3,7 +3,8 @@ import {
   SEARCH_SCROLLING_TRUE,
   SWITCH_TO_SEARCH_MODE,
   SWITCH_TO_TRENDING_MODE,
-  UPDATE_SEARCH_RESULTS
+  UPDATE_SEARCH_RESULTS,
+  SORT_SEARCH
 } from "../../actions/types.js";
 
 const defaultSearchResultsState = {
@@ -31,6 +32,9 @@ const searchResults = (state = defaultSearchResultsState, action) => {
 
     case SWITCH_TO_TRENDING_MODE:
       return defaultSearchResultsState;
+
+    case SORT_SEARCH:
+      return Object.assign({}, state, action.payload);
 
     default:
       return state;

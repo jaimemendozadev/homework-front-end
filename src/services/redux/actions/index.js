@@ -17,6 +17,7 @@ export const switchToSearchMode = payload => ({
   payload
 });
 
+// will have to add sort flag here
 export const loadMoreData = (
   searchValue = null,
   newOffSet,
@@ -49,10 +50,9 @@ export const loadMoreData = (
     giphyResult.searchValue = searchValue;
   }
 
+  // create actionObject that updates Redux based on type
   const actionObject = {};
   actionObject.type = actionTypes.type;
-
-  // Attach giphyResult to actionTypes and dispatch
   actionObject.payload = giphyResult;
 
   dispatch(actionObject);
@@ -68,4 +68,7 @@ export const updateTrendingResults = payload => ({
   payload
 });
 
-export const initAscendingSort = gifData => {};
+export const initiateSorting = ({ type }, payload) => ({
+  type,
+  payload
+});
