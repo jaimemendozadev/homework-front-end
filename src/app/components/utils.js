@@ -48,28 +48,27 @@ export const setCurrentLayout = width => {
 
 const stitch = (firstArray, secondArray, direction) => {
   const results = [];
-  
+  // import_datetime
+
+  console.log("firstArray is ", firstArray);
+  console.log("secondArray is ", secondArray);
+
+  if (!firstArray.length || !secondArray.length) {
+    return [...firstArray, ...secondArray];
+  }
+
   while (firstArray.length && secondArray.length) {
-    let firstDate = firstArray[0].import_datetime;
-    let secondDate = secondArray[0].import_datetime;
+    const firstDate = new Date(firstArray[0].import_datetime);
+    const secondDate = new Date(secondArray[0].import_datetime);
 
-    if (firstDate && !secondDate) {
-      results.push(firstArray.shift());
-    } else if (!firstDate && secondDate) {
-      results.push(secondArray.shift());
+    if (direction === "Asc") {
+      firstDate < secondDate
+        ? results.push(firstArray.shift())
+        : results.push(secondArray.shift());
     } else {
-      firstDate = new Date(firstArray[0].import_datetime);
-      secondDate = new Date(secondArray[0].import_datetime);
-
-      if (direction === "Asc") {
-        firstDate < secondDate
-          ? results.push(firstArray.shift())
-          : results.push(secondArray.shift());
-      } else {
-        firstDate > secondDate
-          ? results.push(firstArray.shift())
-          : results.push(secondArray.shift());
-      }
+      firstDate > secondDate
+        ? results.push(firstArray.shift())
+        : results.push(secondArray.shift());
     }
   }
 
@@ -77,7 +76,7 @@ const stitch = (firstArray, secondArray, direction) => {
 };
 
 export const mergeSort = (dataArray, direction) => {
-  if (dataArray.length < 2) {
+  if (dataArray.length <= 1) {
     return dataArray;
   }
 

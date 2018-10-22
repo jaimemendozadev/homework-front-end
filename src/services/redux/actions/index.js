@@ -48,7 +48,7 @@ export const loadMoreData = (
   // Either merge old gifData & filteredGifs or
   // mergeSort if direction arg is passed
   giphyResult.gifData =
-    direction !== null
+    direction === "Asc" || direction === "Dsc"
       ? mergeSort([...gifData, ...filteredGifs], direction)
       : [...gifData, ...filteredGifs];
 

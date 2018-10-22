@@ -43,7 +43,7 @@ class App extends Component {
       ascendingSort,
       descendingSort
     } = this.props;
-    
+
     const toUpdate = inTrendingMode === true ? trendingResults : searchResults;
 
     // determine if gifData needs to be sorted
