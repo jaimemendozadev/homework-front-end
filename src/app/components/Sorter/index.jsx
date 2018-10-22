@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { mergeSort, prepMergeSortData } from "./utils.js";
 
-import { initiateSorting } from "../../../services/redux/actions/index.js";
+import {
+  initiateSorting,
+  resetSorting
+} from "../../../services/redux/actions/index.js";
 
 const handleSort = (
   appStatus,
@@ -30,11 +33,16 @@ const handleSort = (
   }
 };
 
+const resetSort = callback => {
+  callback();
+};
+
 const Sorter = ({
   appStatus,
   searchResults,
   trendingResults,
-  InitiateSorting
+  InitiateSorting,
+  ResetSorting
 }) => (
   <div className="sorter-container">
     <button
@@ -65,12 +73,15 @@ const Sorter = ({
     >
       Desc. Results
     </button>
-    <button type="button">Reset Sorting</button>
+    <button type="button" onClick={() => resetSort(ResetSorting)}>
+      Reset Sorting
+    </button>
   </div>
 );
 
 Sorter.propTypes = {
   InitiateSorting: PropTypes.func.isRequired,
+  ResetSorting: PropTypes.func.isRequired,
   appStatus: PropTypes.shape({
     appStarted: PropTypes.bool,
     inTrendingMode: PropTypes.bool,
@@ -97,5 +108,5 @@ Sorter.propTypes = {
 
 export default connect(
   null,
-  { InitiateSorting: initiateSorting }
+  { InitiateSorting: initiateSorting, ResetSorting: resetSorting }
 )(Sorter);

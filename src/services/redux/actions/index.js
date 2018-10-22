@@ -2,7 +2,8 @@ import {
   INIT_APP,
   GET_SEARCH_RESULTS,
   UPDATE_TRENDING_RESULTS,
-  SWITCH_TO_SEARCH_MODE
+  SWITCH_TO_SEARCH_MODE,
+  RESET_SORTING
 } from "./types.js";
 import { mergeSort } from "../../../app/components/utils.js";
 
@@ -17,11 +18,6 @@ export const switchToSearchMode = payload => ({
   type: SWITCH_TO_SEARCH_MODE,
   payload
 });
-
-// will have to add sort flag here
-// import mergeSort
-// mergeSort needs (dataArray, direction)
-// pass in direction to loadMoreData
 
 export const loadMoreData = (
   searchValue = null,
@@ -87,3 +83,18 @@ export const initiateSorting = ({ type }, payload) => ({
   type,
   payload
 });
+
+export const resetSorting = () => {
+  const payload = {
+    appStatus: {
+      inTrendingMode: true,
+      inSearchMode: false,
+      ascendingSort: false,
+      descendingSort: false
+    }
+  };
+  return {
+    type: RESET_SORTING,
+    payload
+  };
+};

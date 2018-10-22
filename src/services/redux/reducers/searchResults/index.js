@@ -4,7 +4,8 @@ import {
   SWITCH_TO_SEARCH_MODE,
   SWITCH_TO_TRENDING_MODE,
   UPDATE_SEARCH_RESULTS,
-  SORT_SEARCH
+  SORT_SEARCH,
+  RESET_SORTING
 } from "../../actions/types.js";
 
 const defaultSearchResultsState = {
@@ -35,6 +36,9 @@ const searchResults = (state = defaultSearchResultsState, action) => {
 
     case SORT_SEARCH:
       return Object.assign({}, state, action.payload.gifData);
+
+    case RESET_SORTING:
+      return defaultSearchResultsState;
 
     default:
       return state;

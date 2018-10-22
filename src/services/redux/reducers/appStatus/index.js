@@ -3,7 +3,8 @@ import {
   SWITCH_TO_SEARCH_MODE,
   SWITCH_TO_TRENDING_MODE,
   SORT_TRENDING,
-  SORT_SEARCH
+  SORT_SEARCH,
+  RESET_SORTING
 } from "../../actions/types.js";
 
 const defaultAppStatusState = {
@@ -30,6 +31,9 @@ const appStatus = (state = defaultAppStatusState, action) => {
       return Object.assign({}, state, action.payload.appStatus);
 
     case SORT_SEARCH:
+      return Object.assign({}, state, action.payload.appStatus);
+
+    case RESET_SORTING:
       return Object.assign({}, state, action.payload.appStatus);
 
     default:

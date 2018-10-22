@@ -3,7 +3,8 @@ import {
   UPDATE_TRENDING_RESULTS,
   TRENDING_SCROLLING_TRUE,
   SWITCH_TO_SEARCH_MODE,
-  SORT_TRENDING
+  SORT_TRENDING,
+  RESET_SORTING
 } from "../../actions/types.js";
 
 const defaultTrendingResultsState = {
@@ -30,6 +31,9 @@ const trendingResults = (state = defaultTrendingResultsState, action) => {
 
     case SORT_TRENDING:
       return Object.assign({}, state, action.payload.gifData);
+
+    case RESET_SORTING:
+      return defaultTrendingResultsState;
 
     default:
       return state;
