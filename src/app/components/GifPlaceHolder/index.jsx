@@ -2,13 +2,19 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Placeholder from "../../assets/dancing-slack-penguin.gif";
-import { setLayoutGifSize } from "../utils";
+import { setLayoutGifSize, renderDate } from "./utils.js";
 
 const defaultState = {
   imgURL: Placeholder,
   imgClassName: "gif-placeholder",
   controller: null
 };
+
+const DateDisplay = ({ timestamp }) => (
+  <div>
+    <h6>{renderDate(timestamp)}</h6>
+  </div>
+);
 
 class GifPlaceHolder extends Component {
   constructor(props) {
@@ -49,6 +55,7 @@ class GifPlaceHolder extends Component {
             src={imgURL}
           />
         </Link>
+        <DateDisplay timestamp={gif.import_datetime} />
       </div>
     );
   }
