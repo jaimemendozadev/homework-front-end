@@ -39,9 +39,25 @@ class App extends Component {
       trendingResults,
       searchResults,
       inTrendingMode,
-      LoadMoreData
+      LoadMoreData,
+      ascendingSort,
+      descendingSort
     } = this.props;
+    
     const toUpdate = inTrendingMode === true ? trendingResults : searchResults;
+
+    // determine if gifData needs to be sorted
+    let sortDirection;
+
+    if (ascendingSort || descendingSort) {
+      if (ascendingSort === true && descendingSort === false) {
+        sortDirection = "Asc";
+      } else if (ascendingSort === false && descendingSort === true) {
+        sortDirection = "Dsc";
+      } else {
+        sortDirection = null;
+      }
+    }
 
     // Check to see if user is at bottom of the browswer
     const loadMore = handleScroll(toUpdate);
@@ -57,7 +73,7 @@ class App extends Component {
         };
 
         // Fire action that updates scrolling and fetches more data
-        LoadMoreData(null, newOffSet, gifData, gifIDSet, action);
+        LoadMoreData(null, newOffSet, gifData, gifIDSet, action, sortDirection);
       } else {
         const { offset, gifData, gifIDSet, searchValue } = searchResults;
         const newOffSet = offset + 25;
@@ -67,7 +83,14 @@ class App extends Component {
           type: UPDATE_SEARCH_RESULTS
         };
 
-        LoadMoreData(searchValue, newOffSet, gifData, gifIDSet, action);
+        LoadMoreData(
+          searchValue,
+          newOffSet,
+          gifData,
+          gifIDSet,
+          action,
+          sortDirection
+        );
       }
     }
   };
@@ -113,9 +136,7 @@ class App extends Component {
       searchResults,
       appStarted,
       inTrendingMode,
-      inSearchMode,
-      ascendingSort,
-      descendingSort
+      inSearchMode
     } = this.props;
 
     return (

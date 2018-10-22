@@ -4,6 +4,7 @@ import {
   UPDATE_TRENDING_RESULTS,
   SWITCH_TO_SEARCH_MODE
 } from "./types.js";
+import { mergeSort } from "../../../app/components/utils.js";
 
 import { updateGifFeed } from "../../giphy/index.js";
 
@@ -18,12 +19,17 @@ export const switchToSearchMode = payload => ({
 });
 
 // will have to add sort flag here
+// import mergeSort
+// mergeSort needs (dataArray, direction)
+// pass in direction to loadMoreData
+
 export const loadMoreData = (
   searchValue = null,
   newOffSet,
   gifData,
   gifIDSet,
-  actionTypes
+  actionTypes,
+  direction
 ) => async dispatch => {
   dispatch({ type: actionTypes.scroll, payload: { scrolling: true } });
   const giphyResult = await updateGifFeed(searchValue, newOffSet, gifData);
@@ -39,8 +45,12 @@ export const loadMoreData = (
     }
   });
 
-  // Merge old gifData and filteredGifs
-  giphyResult.gifData = [...gifData, ...filteredGifs];
+  // Either merge old gifData & filteredGifs or
+  // mergeSort if direction arg is passed
+  giphyResult.gifData =
+    direction !== null
+      ? mergeSort([...gifData, ...filteredGifs], direction)
+      : [...gifData, ...filteredGifs];
 
   // Add updated gifIDSet to Redux
   giphyResult.gifIDSet = gifIDSet;
