@@ -63,6 +63,8 @@ Because this is a version 1, there are a few issues that have to be addressed:
 
 - Client side routing works, but the user can't save the URL for bookmarking.
 
+- Refreshing the page on the single GifCard view doesn't bring back the Gif. User has to refresh and go back to homepage.
+
 
 
 ## Future +Plus Features
