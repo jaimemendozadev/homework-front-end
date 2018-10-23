@@ -12,7 +12,7 @@ Infinitely scroll to find the trending Gifs on [Giphy.com](https://giphy.com/) o
 - Initial Setup
 - Create a `.env` File
 - Starting the App
-- App Issues
+- App Bugs ToFix
 - Future +Plus Features
 - Created By
 
@@ -30,7 +30,7 @@ Fire up your terminal and create a new `.env` at the root of the app folder by s
 
 After creating the `.env` file, use your text editor to enter all the necessary credentials, urls, and app variables (like the Giphy API Key) into separate lines inside the `.env` file. 
 
-Do not end the line with punctuation or spacing. The `.env` should appear like the following snippet:
+Do not end the line with punctuation. The `.env` should appear like the following snippet:
 
 ```
 BASE_GIPHY_URL = https://api.giphy.com/v1/gifs
@@ -56,10 +56,12 @@ Go to `http://localhost:4000` in your favorite browser to view the website.
 Remember, you can always stop the server from running by typing `Control + z` in the terminal window you used to start the app.
 
 
-## App Issues
+## App Bugs ToFix
 Because this is a version 1, there are a few issues that have to be addressed:
 
 - Since we're using infinite scrolling, we're making so many API calls that the user experience delays between scrolling and searching.
+
+- Client side routing works, but the user can't save the URL for bookmarking.
 
 
 
