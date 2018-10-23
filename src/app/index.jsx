@@ -1,8 +1,7 @@
-/* no-unused-vars: "warn" */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import styles from "./sass/_styles.scss";
+import styles from "./sass/_styles.scss"; // eslint-disable-line no-unused-vars
 import GifView from "./components/GifView/index.jsx";
 import Search from "./components/Search/index.jsx";
 import Sorter from "./components/Sorter/index.jsx";

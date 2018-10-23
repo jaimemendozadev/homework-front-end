@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unused-prop-types */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { setLayoutGifSize } from "../utils";
@@ -58,6 +57,7 @@ class GifCard extends Component {
             <h2>Gifstagram</h2>
           </div>
           {/* end gifstagram-icon-container  */}
+
           <div className="gifcard-gif-container">
             <img
               className={`gifcard-image ${imgClassName}`}
@@ -73,7 +73,6 @@ class GifCard extends Component {
                 {` ${title.toUpperCase()}`}
               </a>
             </h4>
-
             <h4>
               Gif By:
               <a

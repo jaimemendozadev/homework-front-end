@@ -100,11 +100,13 @@ export const resetSorting = () => {
 
     const resetState = createInitAppData(giphyResults);
 
-    payload.trendingResults = resetState;
+    // Add additional resets to appStatus
+    resetState.appStatus.descendingSort = false;
+    resetState.appStatus.ascendingSort = false;
 
     dispatch({
       type: RESET_SORTING,
-      payload
+      payload: resetState
     });
   };
 };

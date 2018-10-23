@@ -83,7 +83,7 @@ const Sorter = ({
         type="button"
         onClick={() => resetSort(ResetSorting)}
       >
-        Reset Sorting
+        Reset
       </button>
     </div>
   );
@@ -92,6 +92,10 @@ const Sorter = ({
 Sorter.propTypes = {
   InitiateSorting: PropTypes.func.isRequired,
   ResetSorting: PropTypes.func.isRequired,
+  sort: PropTypes.shape({
+    ascendingSort: PropTypes.bool,
+    descendingSort: PropTypes.bool
+  }).isRequired,
   appStatus: PropTypes.shape({
     appStarted: PropTypes.bool,
     inTrendingMode: PropTypes.bool,
