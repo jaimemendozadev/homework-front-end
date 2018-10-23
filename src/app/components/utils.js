@@ -50,10 +50,6 @@ export const setCurrentLayout = width => {
 
 const stitch = (firstArray, secondArray, direction) => {
   const results = [];
-  // import_datetime
-
-  console.log("firstArray is ", firstArray);
-  console.log("secondArray is ", secondArray);
 
   while (firstArray.length && secondArray.length) {
     const firstDate = new Date(firstArray[0].import_datetime);

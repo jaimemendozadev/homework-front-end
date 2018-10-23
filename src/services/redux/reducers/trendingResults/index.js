@@ -33,7 +33,7 @@ const trendingResults = (state = defaultTrendingResultsState, action) => {
       return Object.assign({}, state, action.payload.gifData);
 
     case RESET_SORTING:
-      return defaultTrendingResultsState;
+      return Object.assign({}, state, action.payload.trendingResults);
 
     default:
       return state;

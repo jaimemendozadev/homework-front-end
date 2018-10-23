@@ -42,42 +42,52 @@ const Sorter = ({
   searchResults,
   trendingResults,
   InitiateSorting,
-  ResetSorting
-}) => (
-  <div className="sorter-container">
-    <button
-      type="button"
-      onClick={() =>
-        handleSort(
-          appStatus,
-          searchResults,
-          trendingResults,
-          "Asc",
-          InitiateSorting
-        )
-      }
-    >
-      Asc. Results
-    </button>
-    <button
-      type="button"
-      onClick={() =>
-        handleSort(
-          appStatus,
-          searchResults,
-          trendingResults,
-          "Dsc",
-          InitiateSorting
-        )
-      }
-    >
-      Desc. Results
-    </button>
-    <button type="button" onClick={() => resetSort(ResetSorting)}>
-      Reset Sorting
-    </button>
-  </div>
-);
+  ResetSorting,
+  sort
+}) => {
+  const { ascendingSort, descendingSort } = sort;
+
+  const disableReset = !!(ascendingSort === false && descendingSort === false);
+  return (
+    <div className="sorter-container">
+      <button
+        type="button"
+        onClick={() =>
+          handleSort(
+            appStatus,
+            searchResults,
+            trendingResults,
+            "Asc",
+            InitiateSorting
+          )
+        }
+      >
+        Asc. Results
+      </button>
+      <button
+        type="button"
+        onClick={() =>
+          handleSort(
+            appStatus,
+            searchResults,
+            trendingResults,
+            "Dsc",
+            InitiateSorting
+          )
+        }
+      >
+        Desc. Results
+      </button>
+      <button
+        disabled={disableReset}
+        type="button"
+        onClick={() => resetSort(ResetSorting)}
+      >
+        Reset Sorting
+      </button>
+    </div>
+  );
+};
 
 Sorter.propTypes = {
   InitiateSorting: PropTypes.func.isRequired,

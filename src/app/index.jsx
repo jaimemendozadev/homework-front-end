@@ -89,7 +89,9 @@ class App extends Component {
       searchResults,
       appStarted,
       inTrendingMode,
-      inSearchMode
+      inSearchMode,
+      ascendingSort,
+      descendingSort
     } = this.props;
 
     return (
@@ -103,6 +105,7 @@ class App extends Component {
           appStatus={{ appStarted, inTrendingMode, inSearchMode }}
           searchResults={searchResults}
           trendingResults={trendingResults}
+          sort={{ ascendingSort, descendingSort }}
         />
 
         {this.handleGifView()}
