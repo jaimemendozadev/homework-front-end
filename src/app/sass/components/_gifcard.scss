@@ -3,10 +3,8 @@
 ************************/
 
 @media only screen and (max-width: 480px) {
-  .gifcard-container {
-    height: 60vh;
-    border: 1px solid pink;
-
+  .gifcard-container {  
+    @include borderColor(pink, 3px);
   }
 
   .gifcard-gif-container {

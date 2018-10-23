@@ -1,0 +1,8 @@
+$grey-color: #C6C6C6;
+$button-color: #b0d0f5;
+$pink-1px-border-color: 1px solid pink;
+
+
+@mixin borderColor($color, $px) {
+  border: $px solid $color;
+}

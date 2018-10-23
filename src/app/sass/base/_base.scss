@@ -12,7 +12,7 @@ body {
 }
 
 img.fetched-gif { 
-  border: 1px solid pink;
+  // @include borderColor(pink, 2px);
 }
 
 .gifstagram-icon-container {

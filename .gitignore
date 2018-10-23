@@ -39,6 +39,7 @@ jspm_packages
 # public folder build files
 public/styles.css
 public/bundle.js
+public/*.gif
 
 # env
 .env
