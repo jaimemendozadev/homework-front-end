@@ -1,49 +1,75 @@
-# Eaze Front End Homework
+# [Gifstagram (ver1)](https://github.com/jaimemendozadev/homework-front-end)
 
-Front End coding challenge.
+A single page application that lets you find your favorite Gif from [Giphy.com](https://giphy.com/)!
 
-## Project
+Infinitely scroll to find the trending Gifs on [Giphy.com](https://giphy.com/) on your mobile, tablet, or desktop computer. You can even search for what your heart desires!
 
-We would like you to build a web app that displays the trending GIFs on [Giphy](https://giphy.com/). 
-Users visiting the website should be able to search for GIFs and see a list of results. The user should be able to expand a GIF and see its details (username, rating, anything you think could be relevant).
-
-Users should have a good user experience on desktop, tablet and mobile devices.
-
-This project is pretty open ended in order to leave you some freedom to improve upon the base by focusing on what you like the most.
-
-We strongly encourage you to pick a couple of optional improvements. The following are just some ideas, so if none of these interest you, feel free to do something that isn’t on this list:
-
-- When the user scrolls the page to the bottom, load new GIFs automatically.
-- Create a mosaic layout and display a placeholder when GIFs are still loading.
-- Show off your animation skills!
-- Sort the results by uploaded time and let the user choose if they prefer ascending or descending ordering.
-- Let the user favorite GIFs and list their favorites. The users should be able to retrieve their favorite GIFs even after refreshing the page.
-- Provide the ultimate user experience: scrolling, searching, fetching… could be optimized for UX.
-- Let the user upload a GIF.
-- Add some unit tests.
+![hell-to-the-yeah-gif](https://media.giphy.com/media/jErnybNlfE1lm/giphy.gif)
 
 
-### Project Structure
+## Table of contents
 
-We've included all of the boilerplate to get started with this project using [create-react-app](https://github.com/facebookincubator/create-react-app), feel free to use this structure if you'd like. If you'd prefer to use something other than React or you'd prefer a different project structure, go ahead and make any changes you'd like.
+- Initial Setup
+- Create a `.env` File
+- Starting the App
+- App Issues
+- Future +Plus Features
+- Created By
 
-### Evaluation
+## Initial Setup
 
-The app should run on any computer by running `npm install` and `npm start`.
-We’ll evaluate the exercise by looking at the end result and the code.
+Open up your terminal and clone the repo locally to your computer by running the following command at the target destination: `$ git clone https://github.com/jaimemendozadev/homework-front-end.git`
 
-### Notes
+You will need a Giphy API Key to get the app to work. Go to the [Giphy Developers website](https://developers.giphy.com/) and click on the `Create an App` button to register the app and get an API Key. The good folks at Giphy also [have great documentation](https://developers.giphy.com/docs/) on how to use the API.
 
-Please, don't open a PR against this repo. Just follow the direction from the rectuiter on how to submit the exercise.
+## Create a `.env` File
 
-### Coding at Eaze
+![donatello-typing](https://media.giphy.com/media/cFdHXXm5GhJsc/giphy.gif)
 
-At [Eaze](https://www.eaze.com) we strive for writing simple, maintainable and clean code. 
+Fire up your terminal and create a new `.env` at the root of the app folder by simply typing `$ touch .env.`
 
-We prefer simplicity over complexity.
+After creating the `.env` file, use your text editor to enter all the necessary credentials, urls, and app variables (like the Giphy API Key) into separate lines inside the `.env` file. 
 
-We comment our code and commit often.
+Do not end the line with punctuation or spacing. The `.env` should appear like the following snippet:
 
-We love our users and we really care about providing a good user experience and pleasant UI.
+```
+BASE_GIPHY_URL = https://api.giphy.com/v1/gifs
 
-We encourage out of the box thinking and we love to be impressed!
+API_KEY = ENTER_YOUR_API_KEY_HERE
+
+PORT = 4000
+```
+
+After creating the `.env` and you fire up the app, the key value pairs in the file will correspond to any line of code that references `process.env`.
+
+## Starting the App
+This project uses the [Yarn package manager](https://yarnpkg.com/en/). Go to the Yarn website to learn more about how to install the package manger on your computer.
+
+In the root of the app, use your terminal to run `$ yarn install` to install all the app dependencies. Wait until everything finishes loading.
+
+In the same terminal window, type and enter `$ yarn run dev:build` to build all the dependencies. Wait until everything finishes building.
+
+Finally in another opened terminal tab, type and enter the command `$ yarn run start` to start the app.
+
+Go to `http://localhost:4000` in your favorite browser to view the website. 
+
+Remember, you can always stop the server from running by typing `Control + z` in the terminal window you used to start the app.
+
+
+## App Issues
+Because this is a version 1, there are a few issues that have to be addressed:
+
+- Since we're using infinite scrolling, we're making so many API calls that the user experience delays between scrolling and searching.
+
+
+
+## Future +Plus Features
+- Give Users the ability to upload their own GIFs to [Giphy.com](https://giphy.com).
+
+- Enable users to 💗 favorite their Gifs and persist them in a database.
+
+
+## Created By
+
+**Jaime Mendoza**
+[https://github.com/jaimemendozadev](https://github.com/jaimemendozadev)
