@@ -49,7 +49,7 @@ In the root of the app, use your terminal to run `$ yarn install` to install all
 
 In the same terminal window, type and enter `$ yarn run dev:build` to build all the dependencies. Wait until everything finishes building.
 
-Finally in another opened terminal tab, type and enter the command `$ yarn run start` to start the app.
+Finally in another opened terminal tab, type and enter the command `$ yarn run dev:start` to start the app.
 
 Go to `http://localhost:4000` in your favorite browser to view the website. 
 
