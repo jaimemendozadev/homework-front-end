@@ -47,7 +47,9 @@
     "clear:public": "rm -rfv ./public/*.js && rm -rfv ./public/*.gif  && rm -rfv ./public/*.css",
     "dev:build": "webpack --mode=development --watch",
     "dev:start": "nodemon index.js",
-    "lint": "./node_modules/.bin/eslint --fix './src/**/*.{js,jsx}' && ./node_modules/.bin/eslint --fix ./server/**/*"
+    "lint": "./node_modules/.bin/eslint --fix './src/**/*.{js,jsx}' && ./node_modules/.bin/eslint --fix ./server/**/*",
+    "build": "webpack --mode=production",
+    "start": "node index.js"
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"
