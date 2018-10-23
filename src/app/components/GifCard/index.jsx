@@ -54,8 +54,6 @@ class GifCard extends Component {
 
             <h2>Gifstagram</h2>
           </div>
-          {/* end gifstagram-icon-container  */}
-
           <div className="gifcard-gif-container">
             <img
               className={`gifcard-image ${imgClassName}`}
@@ -63,7 +61,6 @@ class GifCard extends Component {
               alt={`${title} gif from Giphy`}
             />
           </div>
-          {/* end gifcard-gif-container  */}
           <div className="gifcard-text-container">
             <h4>
               Title:
@@ -82,9 +79,7 @@ class GifCard extends Component {
               </a>
             </h4>
           </div>
-          {/* end gifcard-text-container  */}
         </div>
-        {/* end gifcard-container */}
       </div>
     );
   }

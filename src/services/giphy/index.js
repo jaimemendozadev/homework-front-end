@@ -106,6 +106,6 @@ export const updateGifFeed = async (searchValue = null, urlOffset = 0) => {
 
 handleScroll: scrolling boolean
 
-- If user is already at the bottom of the page and request is already in progress to fetch more Gif results, the scrolling flag should be true to prevent another call that makes the same request twice.
+- If user is already at the bottom of the page and request is already in progress to fetch more Gif results, the scrolling flag SHOULD BE TRUE to prevent another call that makes the same request twice.
 
 ********* */

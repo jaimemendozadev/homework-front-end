@@ -20,6 +20,21 @@ export const switchToSearchMode = payload => ({
   payload
 });
 
+export const getGiphySearchResults = responsePayload => ({
+  type: GET_SEARCH_RESULTS,
+  payload: responsePayload
+});
+
+export const updateTrendingResults = payload => ({
+  type: UPDATE_TRENDING_RESULTS,
+  payload
+});
+
+export const initiateSorting = ({ type }, payload) => ({
+  type,
+  payload
+});
+
 export const loadMoreData = (
   searchValue = null,
   newOffSet,
@@ -69,21 +84,6 @@ export const loadMoreData = (
 
   dispatch(actionObject);
 };
-
-export const getGiphySearchResults = responsePayload => ({
-  type: GET_SEARCH_RESULTS,
-  payload: responsePayload
-});
-
-export const updateTrendingResults = payload => ({
-  type: UPDATE_TRENDING_RESULTS,
-  payload
-});
-
-export const initiateSorting = ({ type }, payload) => ({
-  type,
-  payload
-});
 
 export const resetSorting = () => {
   return async dispatch => {

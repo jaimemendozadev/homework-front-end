@@ -23,7 +23,6 @@ const appStatus = (state = defaultAppStatusState, action) => {
     case SWITCH_TO_SEARCH_MODE:
       return Object.assign({}, state, action.payload.appStatus);
 
-    // appStatus = { inSearchMode: false, inTrendingMode: true };
     case SWITCH_TO_TRENDING_MODE:
       return Object.assign({}, state, action.payload.appStatus);
 

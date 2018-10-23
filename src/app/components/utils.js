@@ -1,7 +1,5 @@
 /* eslint no-unused-expressions: ["error", { "allowTernary": true }] */
 
-// Possible className layouts: mobile-layout, tablet-layout, desktop-layout
-
 export const setLayoutGifSize = (gif, currentLayout) => {
   // gif.images.fixed_height.url
   if (currentLayout === "mobile-layout") {

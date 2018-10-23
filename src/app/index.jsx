@@ -29,7 +29,7 @@ class App extends Component {
           : searchResults.gifData;
       return <GifView gifData={gifData} />;
     }
-    return <h1>Loading data ...</h1>;
+    return "";
   };
 
   invokeHandleScroll = () => {

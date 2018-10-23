@@ -57,8 +57,6 @@ class GifPlaceHolder extends Component {
     const { gif, layout } = this.props;
     const { imgURL, imgClassName } = this.state;
 
-    // Possible className layouts: mobile-layout, tablet-layout, desktop-layout
-    // Possible img classNames: gif-placeholder, fetched-gif
     return (
       <div className={`gifplaceholder-container ${layout}`}>
         <Link to={{ pathname: `/gif/${gif.id}`, state: { gif } }}>
