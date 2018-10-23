@@ -82,7 +82,6 @@ class App extends Component {
   };
 
   render() {
-    console.log("this.props inside App ", this.props);
     const {
       trendingResults,
       searchResults,

@@ -44,8 +44,6 @@ class GifCard extends Component {
     const { title, username, images, url } = gif;
     const { imgClassName } = this.state;
 
-    console.log("gif inside GifCard ", gif);
-
     return (
       <div className="app-container-gif-card">
         <div className="gifcard-container">

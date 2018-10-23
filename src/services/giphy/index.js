@@ -57,6 +57,7 @@ const processResponse = giphyResponse => {
 };
 
 // makeInitRequest makes first request for trendingResults & searchResults
+// also invoked after pushing Reset button to reset Redux state
 export const makeInitRequest = async (searchValue = null, offset = 0) => {
   const requestURL =
     searchValue === null
@@ -98,7 +99,6 @@ export const updateGifFeed = async (searchValue = null, urlOffset = 0) => {
     return newState;
   } catch (error) {
     console.log("error fetching the gifs ", error);
-    return { isError: true, status: "There was a problem fetching the Gifs." };
   }
 };
 

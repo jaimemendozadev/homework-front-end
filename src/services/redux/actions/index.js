@@ -86,15 +86,6 @@ export const initiateSorting = ({ type }, payload) => ({
 });
 
 export const resetSorting = () => {
-  const payload = {
-    appStatus: {
-      inTrendingMode: true,
-      inSearchMode: false,
-      ascendingSort: false,
-      descendingSort: false
-    }
-  };
-
   return async dispatch => {
     const giphyResults = await makeInitRequest(null, 0);
 
@@ -110,30 +101,3 @@ export const resetSorting = () => {
     });
   };
 };
-
-/*
-
-export const createInitAppData = giphyResults => {
-  const initialState = {};
-  const gifIDSet = {};
-
-  // create gifIDSet for Redux store to track gifs already seen
-  giphyResults.gifData.forEach(({ id }) => {
-    gifIDSet[id] = true;
-  });
-
-  initialState.giphyResults = giphyResults;
-  initialState.giphyResults.gifIDSet = gifIDSet;
-
-  // Tell Redux store app is currently inTrending Mode
-  initialState.appStatus = {
-    appStarted: true,
-    inTrendingMode: true,
-    inSearchMode: false
-  };
-
-  return initialState;
-};
-
-
-*/
