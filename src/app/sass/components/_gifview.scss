@@ -8,7 +8,7 @@
     width: 80%;
     //height: 90vh;
     margin: 0 auto;
-    border: 5px solid salmon;
+    @include borderColor(pink, 3px);
   }
 
   .mobile-layout{
@@ -22,7 +22,7 @@
 
 @media only screen and (min-width: 481px) and (max-width: 1024px) {
   .gifview-container {
-    border: 5px solid goldenrod;
+    @include borderColor(pink, 5px);
     width: 70%;
     margin: 0 auto;
   }
@@ -39,7 +39,7 @@
 @media only screen and (min-width: 1025px) {
   .gifview-container {
     width: 80%;
-    border: 1px solid aquamarine;
+    @include borderColor(pink, 5px);
   }
 
   .desktop-layout {
